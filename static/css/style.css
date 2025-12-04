@@ -1,0 +1,286 @@
+/* =========================================
+   1. Global Variables & Reset
+   ========================================= */
+:root {
+    --bg-color: #FAFAFA;      
+    --text-color: #2D3748;    
+    --accent-color: #3182ce;  /* The Techy Blue */
+    
+    /* New Navigation Colors */
+    --nav-bg: var(--accent-color); 
+    --nav-text: #FFFFFF;      /* White text for contrast on blue */
+
+    /* FONTS */
+    --font-header: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.7;
+}
+
+img {
+    max-width: 100%;    /* Ensures image never overflows its container */
+    height: auto;       /* Maintains aspect ratio */
+    display: block;     /* Removes pesky bottom spacing */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+
+/* =========================================
+   2. Navigation Bar (Blue & Responsive)
+   ========================================= */
+.navbar {
+    background-color: var(--nav-bg); /* Now using the Tech Blue */
+    color: var(--nav-text);
+    display: flex;
+    justify-content: space-between;
+    align_items: center;
+    padding: 0 40px;
+    min-height: 80px; /* changed height to min-height to allow growth on mobile */
+    box-shadow: 0 2px 10px rgba(50, 50, 93, 0.1); /* Subtle shadow for depth */
+}
+
+/* -- Left Side (Main Nav) -- */
+.nav-left {
+    display: flex;
+    gap: 30px;
+    align_items: center;
+}
+
+.nav-link {
+    font-family: var(--font-header);
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: relative;
+    padding: 8px 0;
+    color: var(--nav-text); /* Force white text */
+}
+
+/* Hover Slide Effect (Now White) */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #FFFFFF; /* White underline looks best on blue */
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    opacity: 0.8; /* Slight fade instead of color change */
+}
+
+/* -- Right Side (Socials) -- */
+.nav-right {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-text {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
+    font-weight: 600;
+}
+
+.nav-text:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+/* =========================================
+   3. Hero Section
+   ========================================= */
+.hero {
+    text-align: center;
+    padding: 80px 20px; /* Reduced top padding slightly */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-text h1 {
+    font-family: var(--font-header);
+    font-size: 3.5rem;
+    letter-spacing: -1px;
+    margin-bottom: 15px;
+    color: #1A202C;
+}
+
+.subtitle {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 1.4rem;
+    color: #4A5568;
+    margin-bottom: 10px;
+}
+
+.subtitle-small {
+    font-family: var(--font-header);
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+/* -- Profile Picture Area -- */
+.profile-container {
+    margin: 50px auto;
+}
+
+.profile-placeholder {
+    width: 180px;
+    height: 180px;
+    background-color: #E2E8F0;
+    border-radius: 50%;
+    display: flex;
+    align_items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: #A0AEC0;
+    font-family: var(--font-header);
+    font-weight: bold;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================
+   4. Blog Post Styling
+   ========================================= */
+.content-container {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.blog-content h1 {
+    font-family: var(--font-header);
+    color: #2D3748;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.blog-content p {
+    color: #4A5568;
+    font-size: 1.125rem;
+    margin-bottom: 1em;
+}
+
+
+/* =========================================
+   5. Projects Section (Grid Layout)
+   ========================================= */
+.projects-grid {
+    display: grid;
+    /* The Magic Line: Fits as many 300px cards as possible, then wraps */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px;          /* Space between cards */
+    padding: 20px 0;
+}
+
+.project-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 25px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px); /* Slight lift effect */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-color);
+}
+
+.project-title {
+    font-family: var(--font-header);
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #2D3748;
+}
+
+.project-desc {
+    font-size: 0.95rem;
+    color: #718096;
+    margin-bottom: 20px;
+}
+
+/* Standard button style for "View Code" links */
+.btn-link {
+    display: inline-block;
+    font-family: var(--font-header);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   6. Mobile Responsiveness (Media Queries)
+   ========================================= */
+/* 
+   This block applies ONLY when screen width is 768px or less 
+   (typical tablet/mobile size)
+*/
+@media (max-width: 768px) {
+    
+    .navbar {
+        /* STACKING CONCEPT: Switch from Row to Column */
+        flex-direction: column; 
+        height: auto;          /* Let height expand to fit stacked content */
+        padding: 20px;
+    }
+
+    .nav-left {
+        /* Center the links and stack them nicely */
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 15px; /* Add space between Nav and Socials */
+        width: 100%;
+    }
+
+    .nav-right {
+        /* Center the social links */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem; /* Smaller font so it fits on phone screens */
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+}
