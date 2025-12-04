@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-text">
+        <h1>Hi there! I am Arash Mirshahi</h1>
+        <p class="subtitle">A COGNITIVE SCIENCE & AI GRADUATE</p>
+        <p class="subtitle-small">WITH A PASSION FOR DATA VISUALIZATION AND PYTHON</p>
+    </div>
+
+    <div class="profile-container">
+        <!-- Placeholder for the image -->
+        <div class="profile-placeholder">{Insert Profile pic}</div>
+        <!-- Once you add an image to static/images/profile.jpg, uncomment below: -->
+        <!-- <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Arash Profile" class="profile-img"> -->
+    </div>
+
+    <div class="bio-summary">
+        <p>Short summary about who i am, what i do on a regular basis, what i like/dont like etc.</p>
+    </div>
+</section>
+{% endblock %}

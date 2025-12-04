@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Arash Mirshahi{% endblock %}</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Optional: Import a nice font (like 'Lato' or 'Playfair Display' as seen in your sketch) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation Bar (Based on your sketch) -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <!-- Using Flask's url_for to generate links dynamically -->
+            <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Projects</a>
+            <a href="#" class="nav-link">CV</a>
+            <!-- Example of linking to a blog post (we'll make a real list later) -->
+            <a href="{{ url_for('post', title='welcome') }}" class="nav-link">Blog</a>
+        </div>
+        
+        <div class="nav-right">
+            <span class="nav-text">Kaggle</span>
+            <span class="nav-text">Goodreads</span>
+            <span class="nav-text">LinkedIn</span>
+            <span class="nav-text">Github</span>
+            <span class="nav-text">Instagram (fitness)</span>
+        </div>
+    </nav>
+
+    <!-- Content Injection Point -->
+    <div class="content-container">
+        {% block content %}
+        <!-- Child templates (home.html, post.html) will inject code here -->
+        {% endblock %}
+    </div>
+
+</body>
+</html>
