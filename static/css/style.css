@@ -289,3 +289,51 @@ a {
         font-size: 1.1rem;
     }
 }
+
+/* =========================================
+   Bio & Tech Stack Styling
+   ========================================= */
+
+/* The container for text */
+.bio-summary {
+    max-width: 600px; /* Keeps line length readable */
+    margin: 40px auto;
+    text-align: center;
+    color: #4A5568;
+}
+
+/* The "Hook" paragraph */
+.bio-lead {
+    font-size: 1.35rem; /* Slightly larger than normal text */
+    color: #2D3748;     /* Darker color for emphasis */
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+/* Standard paragraph spacing */
+.bio-summary p {
+    margin-bottom: 25px;
+    font-size: 1.25rem;
+    line-height: 1.8;
+}
+
+/* The Badge Container */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap; /* Wraps to next line on phones */
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+/* Individual Badges */
+.tech-badge {
+    background-color: #EDF2F7; /* Light gray background */
+    color: #2D3748;
+    padding: 6px 12px;
+    border-radius: 20px;       /* Pill shape */
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: var(--font-header);
+    border: 1px solid #CBD5E0;
+}
