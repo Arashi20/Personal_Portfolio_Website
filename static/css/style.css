@@ -296,10 +296,11 @@ a {
 
 /* The container for text */
 .bio-summary {
-    max-width: 600px; /* Keeps line length readable */
+    max-width: 800px; /* Keeps line length readable */
     margin: 40px auto;
     text-align: center;
     color: #4A5568;
+    padding: 0 20px;    /* Safety padding so text doesn't touch edge on phones */
 }
 
 /* The "Hook" paragraph */
@@ -308,6 +309,7 @@ a {
     color: #2D3748;     /* Darker color for emphasis */
     margin-bottom: 20px;
     font-weight: 400;
+    
 }
 
 /* Standard paragraph spacing */
@@ -315,6 +317,7 @@ a {
     margin-bottom: 25px;
     font-size: 1.25rem;
     line-height: 1.8;
+    
 }
 
 /* The Badge Container */
