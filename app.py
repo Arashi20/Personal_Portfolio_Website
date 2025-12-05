@@ -18,6 +18,14 @@ def home():
     """
     return render_template('home.html')
 
+@app.route('/projects')
+def projects():
+    """
+    Renders the Portfolio/Projects page.
+    """
+    return render_template('projects.html')
+
+
 @app.route('/blog/<title>')
 def post(title):
     """
