@@ -26,6 +26,13 @@ body {
     color: var(--text-color);
     font-family: var(--font-body);
     line-height: 1.7;
+
+    /* NEW: Flex column layout to enable sticky footer */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Forces body to be at least the height of the screen */
+
+
 }
 
 img {
@@ -117,7 +124,7 @@ a {
 .hero {
     text-align: center;
     padding: 80px 20px; /* Reduced top padding slightly */
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -182,6 +189,8 @@ a {
    4. Blog Post Styling
    ========================================= */
 .content-container {
+    /* Add this property to push the footer down */
+    flex: 1;
     max-width: 700px;
     margin: 60px auto;
     padding: 0 20px;
@@ -296,7 +305,7 @@ a {
 
 /* The container for text */
 .bio-summary {
-    max-width: 800px; /* Keeps line length readable */
+    max-width: 900px; /* Keeps line length readable */
     margin: 40px auto;
     text-align: center;
     color: #4A5568;
@@ -339,4 +348,53 @@ a {
     font-weight: 600;
     font-family: var(--font-header);
     border: 1px solid #CBD5E0;
+}
+
+
+/* =========================================
+   Footer Styling
+   ========================================= */
+.footer {
+    background-color: var(--nav-bg); /* Matches Navbar Blue */
+    color: var(--nav-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    height: 60px; /* Slightly shorter than header */
+    margin-top: auto; /* Extra safety to push to bottom */
+}
+
+.footer-left {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-family: var(--font-body);
+}
+
+.footer-right {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.footer-icon {
+    color: rgba(255, 255, 255, 0.8); /* Transparent white */
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.footer-icon:hover {
+    color: #FFFFFF;       /* Bright white */
+    transform: translateY(-3px); /* Pop-up effect */
+}
+
+/* Mobile Responsiveness for Footer */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column; /* Stack items */
+        height: auto;
+        padding: 15px;
+        gap: 10px;
+        text-align: center;
+    }
 }

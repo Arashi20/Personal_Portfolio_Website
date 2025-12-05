@@ -25,11 +25,12 @@
         </div>
         
         <div class="nav-right">
-            <a href="#" class="nav-icon" title="Kaggle"><i class="fab fa-kaggle"></i></a>
-            <a href="#" class="nav-icon" title="Goodreads"><i class="fab fa-goodreads"></i></a>
-            <a href="#" class="nav-icon" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/Arashi20" class="nav-icon" title="Github"><i class="fab fa-github"></i></a>
-            <a href="#" class="nav-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <!-- Make sure the links open in a new tab -->
+            <a href="https://www.kaggle.com/arashmirshahi" class="nav-icon" title="Kaggle" target="_blank" rel="noopener noreferrer"><i class="fab fa-kaggle"></i></a>
+            <a href="https://www.goodreads.com/user/show/169512164-arash-mirshahi" class="nav-icon" title="Goodreads" target="_blank" rel="noopener noreferrer"><i class="fab fa-goodreads"></i></a>
+            <a href="https://www.linkedin.com/in/arash-mirshahi-159995167" class="nav-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Arashi20" class="nav-icon" title="Github" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/arash.liftz" class="nav-icon" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
         </div>
     </nav>
 
@@ -39,6 +40,34 @@
         <!-- Child templates (home.html, post.html) will inject code here -->
         {% endblock %}
     </div>
+
+    <!-- ========================
+         NEW: Footer Section
+         ======================== -->
+    <footer class="footer">
+        <!-- Left Side: Copyright / Name -->
+        <div class="footer-left">
+            <span>&copy; 2025 Arash Mirshahi</span>
+        </div>
+
+        <!-- Right Side: Contact Icons -->
+        <div class="footer-right">
+            <!-- 1. Phone Icon (Update the number) -->
+            <a href="tel:+31640998004" class="footer-icon" title="Call Me">
+                <i class="fas fa-phone"></i>
+            </a>
+
+            <!-- 2. Email Icon (Update the email) -->
+            <a href="mailto:arashmirshahi14@gmail.com" class="footer-icon" title="Send Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+
+            <!-- 3. LinkedIn Icon -->
+            <a href="https://www.linkedin.com/in/arash-mirshahi-159995167" class="footer-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+    </footer>
 
 </body>
 </html>
