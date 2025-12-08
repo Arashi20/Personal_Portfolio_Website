@@ -3,72 +3,75 @@
 {% block title %}Projects - Arash Mirshahi{% endblock %}
 
 {% block content %}
-<section class="hero" style="padding-bottom: 20px;">
+<!-- Added 'hero-compact' class instead of inline style -->
+<section class="hero hero-compact">
     <div class="hero-text">
-        <h1 style="font-size: 2.5rem;">My Projects</h1>
-        <p class="subtitle" style="font-size: 1.2rem;">
+        <h1>My Projects</h1>
+        <p class="subtitle">
             A selection of my work in Data Science, AI Agents, and Engineering.
         </p>
     </div>
 </section>
 
-<!-- Main Projects Grid -->
-<div class="content-container">
-    <div class="projects-grid">
+<!-- 
+    Removed the extra <div class="content-container"> wrapper here.
+    base.html already provides it, so we just start the grid directly.
+-->
+<div class="projects-grid">
 
-        <!-- PROJECT 1: Stock Portfolio Dashboard -->
-        <div class="project-card">
-            <h3 class="project-title">Stock Portfolio Dashboard</h3>
-            <p class="project-desc">
-                A comprehensive full-stack web application built with <strong>Flask</strong> and <strong>Plotly</strong> to track and visualize investment portfolios. 
-                Features real-time data updates, interactive charts, and performance metrics.
-            </p>
-            <div class="tech-stack" style="justify-content: flex-start; margin: 15px 0;">
-                <span class="tech-badge" style="font-size: 0.75rem;">Python</span>
-                <span class="tech-badge" style="font-size: 0.75rem;">Flask</span>
-                <span class="tech-badge" style="font-size: 0.75rem;">Plotly</span>
-                <span class="tech-badge" style="font-size: 0.75rem;">CSS</span>
-            </div>
-            <a href="https://github.com/Arashi20/Stock_Portfolio_Dashboard" target="_blank" class="btn-link">
-                View Code <i class="fab fa-github"></i>
-            </a>
+    <!-- PROJECT 1: Stock Portfolio Dashboard -->
+    <div class="project-card">
+        <h3 class="project-title">Stock Portfolio Dashboard</h3>
+        <p class="project-desc">
+            A comprehensive full-stack web application built with <strong>Flask</strong> and <strong>Plotly</strong> to track and visualize investment portfolios. 
+            Features real-time data updates, interactive charts, and performance metrics.
+        </p>
+        <!-- Used new classes: tech-stack-left, tech-badge-small -->
+        <div class="tech-stack tech-stack-left">
+            <span class="tech-badge tech-badge-small">Python</span>
+            <span class="tech-badge tech-badge-small">Flask</span>
+            <span class="tech-badge tech-badge-small">Plotly</span>
+            <span class="tech-badge tech-badge-small">CSS</span>
         </div>
-
-        <!-- PROJECT 2: Stock Research MAS (Multi-Agent System) -->
-        <div class="project-card">
-            <h3 class="project-title">AI Stock Research Agent</h3>
-            <p class="project-desc">
-                An autonomous <strong>Multi-Agent System (MAS)</strong> designed to research financial markets. 
-                Agents collaborate to scrape news, analyze sentiment, and generate investment reports automatically.
-            </p>
-            <div class="tech-stack" style="justify-content: flex-start; margin: 15px 0;">
-                <span class="tech-badge" style="font-size: 0.75rem;">LangChain</span>
-                <span class="tech-badge" style="font-size: 0.75rem;">LLMs</span>
-                <span class="tech-badge" style="font-size: 0.75rem;">Python</span>
-                <span class="tech-badge" style="font-size: 0.75rem;">Agents</span>
-            </div>
-            <a href="https://github.com/Arashi20/stock-research-MAS" target="_blank" class="btn-link">
-                View Code <i class="fab fa-github"></i>
-            </a>
-        </div>
-
-        <!-- PROJECT 3: Portfolio Website (Meta!) -->
-        <div class="project-card">
-            <h3 class="project-title">Personal Portfolio</h3>
-            <p class="project-desc">
-                The website you are looking at right now! Designed from scratch to serve as a minimalist, high-performance extension of my CV. 
-                Built with a focus on clean design and responsiveness.
-            </p>
-            <div class="tech-stack" style="justify-content: flex-start; margin: 15px 0;">
-                <span class="tech-badge" style="font-size: 0.75rem;">Flask</span>
-                <span class="tech-badge" style="font-size: 0.75rem;">HTML/CSS</span>
-                <span class="tech-badge" style="font-size: 0.75rem;">Design</span>
-            </div>
-            <a href="https://github.com/Arashi20/Personal_Portfolio_Website" target="_blank" class="btn-link">
-                View Code <i class="fab fa-github"></i>
-            </a>
-        </div>
-
+        <a href="https://github.com/Arashi20/Stock_Portfolio_Dashboard" target="_blank" class="btn-link">
+            View Code <i class="fab fa-github"></i>
+        </a>
     </div>
+
+    <!-- PROJECT 2: Stock Research MAS (Multi-Agent System) -->
+    <div class="project-card">
+        <h3 class="project-title">AI Stock Research Agent</h3>
+        <p class="project-desc">
+            An autonomous <strong>Multi-Agent System (MAS)</strong> designed to research financial markets. 
+            Agents collaborate to scrape news, analyze sentiment, and generate investment reports automatically.
+        </p>
+        <div class="tech-stack tech-stack-left">
+            <span class="tech-badge tech-badge-small">LangChain</span>
+            <span class="tech-badge tech-badge-small">LLMs</span>
+            <span class="tech-badge tech-badge-small">Python</span>
+            <span class="tech-badge tech-badge-small">Agents</span>
+        </div>
+        <a href="https://github.com/Arashi20/stock-research-MAS" target="_blank" class="btn-link">
+            View Code <i class="fab fa-github"></i>
+        </a>
+    </div>
+
+    <!-- PROJECT 3: Portfolio Website (Meta!) -->
+    <div class="project-card">
+        <h3 class="project-title">Personal Portfolio</h3>
+        <p class="project-desc">
+            The website you are looking at right now! Designed from scratch to serve as a minimalist, high-performance extension of my CV. 
+            Built with a focus on clean design and responsiveness.
+        </p>
+        <div class="tech-stack tech-stack-left">
+            <span class="tech-badge tech-badge-small">Flask</span>
+            <span class="tech-badge tech-badge-small">HTML/CSS</span>
+            <span class="tech-badge tech-badge-small">Design</span>
+        </div>
+        <a href="https://github.com/Arashi20/Personal_Portfolio_Website" target="_blank" class="btn-link">
+            View Code <i class="fab fa-github"></i>
+        </a>
+    </div>
+
 </div>
 {% endblock %}

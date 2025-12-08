@@ -302,7 +302,7 @@ a {
     }
 
     /* Optimize CV Page on smaller devices */
-    
+
     /* 1. Give the container more breathing room */
     .cv-container {
         padding: 20px;      /* Reduced from 40px to save space */
@@ -552,4 +552,26 @@ a {
     font-size: 0.9rem;
     font-weight: 500;
     color: #333;
+}
+
+
+/* =========================================
+   8. Projects Page Specifics
+   ========================================= */
+
+/* A modifier for the hero section on the projects page */
+.hero-compact {
+    padding-bottom: 20px;
+}
+
+/* Modifier to align tech stack badges to the left (for cards) */
+.tech-stack-left {
+    justify-content: flex-start;
+    margin: 15px 0;
+}
+
+/* Modifier for smaller badges inside cards */
+.tech-badge-small {
+    font-size: 0.75rem;
+    padding: 4px 10px; /* Slightly smaller padding */
 }
