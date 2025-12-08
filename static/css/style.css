@@ -27,11 +27,14 @@ body {
     font-family: var(--font-body);
     line-height: 1.7;
 
-    /* NEW: Flex column layout to enable sticky footer */
+    /* Flex column layout to enable sticky footer */
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Forces body to be at least the height of the screen */
-
+    
+    /* Prevent horizontal scroll issues */
+    overflow-x: hidden;
+    width: 100%;
 
 }
 
@@ -215,8 +218,8 @@ a {
    ========================================= */
 .projects-grid {
     display: grid;
-    /* The Magic Line: Fits as many 300px cards as possible, then wraps */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    /* The Magic Line: Fits as many 240px cards as possible, then wraps */
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); 
     gap: 30px;          /* Space between cards */
     padding: 20px 0;
 }
@@ -397,4 +400,112 @@ a {
         gap: 10px;
         text-align: center;
     }
+}
+
+/* CV Page Specific Styles */
+
+/* Container that looks like a paper document */
+.cv-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #fff; /* White paper look */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    color: #333;
+}
+
+/* Header layout */
+.cv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 20px;
+}
+
+.cv-header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.btn-download {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-download:hover {
+    background-color: #555;
+}
+
+/* Section Styling */
+.cv-section {
+    margin-bottom: 30px;
+}
+
+.cv-section h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    border-left: 5px solid #3498db; /* Accent color bar */
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+/* Timeline Item Styling */
+.cv-item {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.cv-date {
+    min-width: 120px;
+    font-weight: bold;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    padding-top: 5px;
+}
+
+.cv-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+}
+
+.cv-details h4 {
+    margin: 0 0 10px 0;
+    font-weight: normal;
+    font-style: italic;
+    color: #666;
+}
+
+.cv-details ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.cv-details li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background: #f0f2f5;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
 }
