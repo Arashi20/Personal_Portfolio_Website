@@ -6,10 +6,10 @@ import os
 
 app = Flask(__name__)
 
-# Configuration
-# We point to the 'posts' folder to read markdown files
-POSTS_DIR = 'posts'
 
+POSTS_DIR = 'posts' # Directory where markdown blog posts are stored
+
+# Home Route
 @app.route('/')
 def home():
     """
@@ -18,6 +18,8 @@ def home():
     """
     return render_template('home.html')
 
+
+# Projects Route
 @app.route('/projects')
 def projects():
     """
@@ -25,7 +27,7 @@ def projects():
     """
     return render_template('projects.html')
 
-
+# CV Route
 @app.route('/cv')
 def cv():
     """
@@ -34,8 +36,37 @@ def cv():
     return render_template('cv.html')
 
 
+# Blog Post Route
+@app.route('/blog')
+def blog():
+    """
+    Renders the Blog Index page.
+    Scans the 'posts' directory and lists all markdown files.
+    """
+    posts = []
+    
+    # robust check to ensure directory exists
+    if os.path.exists(POSTS_DIR):
+        # Get all files in the directory
+        files = os.listdir(POSTS_DIR)
+        
+        for file in files:
+            if file.endswith('.md'):
+                # Extract the slug (filename without .md)
+                slug = file[:-3]
+                
+                # Create a pretty title (replace underscores with spaces)
+                title = slug.replace('_', ' ').title()
+                
+                # Add to our list
+                posts.append({'slug': slug, 'title': title})
+    
+    # Sort posts alphabetically (or you could reverse sort to show newest if named by date)
+    posts.sort(key=lambda x: x['title']) 
+    
+    return render_template('blog.html', posts=posts)
 
-
+# Individual Blog Post Route
 @app.route('/blog/<title>')
 def post(title):
     """

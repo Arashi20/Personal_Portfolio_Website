@@ -575,3 +575,106 @@ a {
     font-size: 0.75rem;
     padding: 4px 10px; /* Slightly smaller padding */
 }
+
+
+/* =========================================
+   9. Blog Index Styling
+   ========================================= */
+
+.blog-index-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    /* Uses flex column from body, but ensures it takes space */
+    flex: 1; 
+}
+
+.blog-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.blog-header h1 {
+    font-family: var(--font-header);
+    font-size: 2.5rem;
+    color: #2D3748;
+    margin-bottom: 10px;
+}
+
+/* The List of Cards */
+.blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.blog-card {
+    display: block; /* Makes the whole area clickable */
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 30px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    text-decoration: none; /* Removes default link underline */
+}
+
+.blog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-color: var(--accent-color);
+}
+
+.blog-card h2 {
+    font-family: var(--font-header);
+    font-size: 1.5rem;
+    color: #2D3748;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+.blog-card:hover h2 {
+    color: var(--accent-color);
+}
+
+.read-more {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.read-more i {
+    margin-left: 5px;
+    transition: margin-left 0.3s;
+}
+
+.blog-card:hover .read-more i {
+    margin-left: 10px; /* clear visual feedback on hover */
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    color: #718096;
+    font-style: italic;
+    padding: 40px;
+    background: #f7fafc;
+    border-radius: 8px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .blog-header h1 {
+        font-size: 2rem;
+    }
+    
+    .blog-card {
+        padding: 20px;
+    }
+
+    .blog-card h2 {
+        font-size: 1.25rem;
+    }
+}
