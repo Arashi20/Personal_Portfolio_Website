@@ -19,7 +19,7 @@
             <!-- Using Flask's url_for to generate links dynamically -->
             <a href="{{ url_for('home') }}" class="nav-link">Home</a>
             <a href="{{ url_for('projects') }}" class="nav-link">Projects</a>
-            <a href="#" class="nav-link">CV</a>
+            <a href="{{ url_for('cv') }}" class="nav-link">CV</a>
             <!-- Example of linking to a blog post (we'll make a real list later) -->
             <a href="{{ url_for('post', title='welcome') }}" class="nav-link">Blog</a>
         </div>

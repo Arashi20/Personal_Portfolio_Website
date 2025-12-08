@@ -26,6 +26,16 @@ def projects():
     return render_template('projects.html')
 
 
+@app.route('/cv')
+def cv():
+    """
+    Renders the CV page.
+    """
+    return render_template('cv.html')
+
+
+
+
 @app.route('/blog/<title>')
 def post(title):
     """
