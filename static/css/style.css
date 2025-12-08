@@ -300,6 +300,50 @@ a {
     .subtitle {
         font-size: 1.1rem;
     }
+
+    /* Optimize CV Page on smaller devices */
+    
+    /* 1. Give the container more breathing room */
+    .cv-container {
+        padding: 20px;      /* Reduced from 40px to save space */
+        margin: 20px auto;  /* Reduce outer margin */
+    }
+
+    /* 2. Stack the Header (Title on top, Button on bottom) */
+    .cv-header {
+        flex-direction: column; /* Stacks items vertically */
+        align-items: flex-start; /* Aligns them to the left */
+        gap: 15px;              /* Adds space between title and button */
+    }
+
+    .cv-header h1 {
+        font-size: 2rem;    /* Smaller font prevents wrapping/overflow */
+        line-height: 1.2;
+    }
+
+    /* Make the button full-width for easy tapping */
+    .btn-download {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /* 3. Stack the Timeline (Date on top, Details on bottom) */
+    .cv-item {
+        flex-direction: column; /* Stack vertically */
+    }
+
+    .cv-date {
+        min-width: auto;    /* Remove the forced 120px width */
+        margin-bottom: 5px; /* Small gap below the date */
+        color: var(--accent-color); /* Highlight the date slightly */
+    }
+    
+    .cv-details ul {
+        padding-left: 15px; /* Save space on indentation */
+    }
+
 }
 
 /* =========================================
