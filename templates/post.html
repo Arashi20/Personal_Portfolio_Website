@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+<!-- Make the browser tab title look nice (e.g., "Welcome Post" instead of "welcome-post") -->
+{% block title %}{{ title | replace('-', ' ') | title }}{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    
+    <!-- 1. Navigation Back Button -->
+    <div style="margin-bottom: 30px;">
+        <!-- Assuming your blog index route is named 'blog' -->
+        <a href="{{ url_for('blog') }}" class="btn-link">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+    </div>
+
+    <!-- 
+       2. The Article Content 
+       We wrap this in 'blog-content' because you already added styles for this 
+       class in your css file earlier (lines 199-210 in style.css).
+    -->
+    <article class="blog-content">
+        <!-- 
+           The 'safe' filter is CRITICAL. 
+           Without it, you would see things like "<h1>Hello</h1>" written out as text.
+        -->
+        {{ content | safe }}
+    </article>
+
+</div>
+{% endblock %}
