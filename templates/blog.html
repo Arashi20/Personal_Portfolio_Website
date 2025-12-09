@@ -13,16 +13,19 @@
     <div class="blog-list">
         {% if posts %}
             {% for post in posts %}
-            <!-- Each Post is a clickable card -->
             <a href="{{ url_for('post', title=post.slug) }}" class="blog-card">
                 <div class="blog-card-content">
+                    <!-- NEW: Display the Date above the title -->
+                    {% if post.date %}
+                        <span class="blog-date">{{ post.date }}</span>
+                    {% endif %}
+                    
                     <h2>{{ post.title }}</h2>
                     <span class="read-more">Read Article <i class="fas fa-arrow-right"></i></span>
                 </div>
             </a>
             {% endfor %}
         {% else %}
-            <!-- Fallback if no posts exist yet -->
             <div class="empty-state">
                 <p>No posts found. Time to write something!</p>
             </div>

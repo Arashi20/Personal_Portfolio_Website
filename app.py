@@ -41,28 +41,43 @@ def cv():
 def blog():
     """
     Renders the Blog Index page.
-    Scans the 'posts' directory and lists all markdown files.
+    Expects files named like: YYYY-MM-DD_post_title.md
+    Example: 2025-12-09_welcome.md
     """
     posts = []
     
-    # robust check to ensure directory exists
     if os.path.exists(POSTS_DIR):
-        # Get all files in the directory
         files = os.listdir(POSTS_DIR)
         
         for file in files:
             if file.endswith('.md'):
-                # Extract the slug (filename without .md)
-                slug = file[:-3]
+                slug = file[:-3]  # Remove .md extension
                 
-                # Create a pretty title (replace underscores with spaces)
-                title = slug.replace('_', ' ').title()
+                # Default values
+                date_part = ""
+                title_part = slug
                 
-                # Add to our list
-                posts.append({'slug': slug, 'title': title})
+                # Split filename by the first underscore
+                # "2025-12-09_welcome" -> ["2025-12-09", "welcome"]
+                if '_' in slug:
+                    parts = slug.split('_', 1)
+                    # Check if the first part looks like a date (simple length check)
+                    if len(parts[0]) == 10: 
+                        date_part = parts[0]
+                        title_part = parts[1]
+                
+                # Pretty format the title
+                pretty_title = title_part.replace('_', ' ').title()
+                
+                posts.append({
+                    'slug': slug,            # Needed for the link URL
+                    'title': pretty_title,   # Needed for display "Welcome"
+                    'date': date_part,       # Needed for display "2025-12-09"
+                    'filename': file         # Needed for sorting
+                })
     
-    # Sort posts alphabetically (or you could reverse sort to show newest if named by date)
-    posts.sort(key=lambda x: x['title']) 
+    # Sort by filename in REVERSE order (Newest dates first)
+    posts.sort(key=lambda x: x['filename'], reverse=True)
     
     return render_template('blog.html', posts=posts)
 
