@@ -352,7 +352,7 @@ a {
 
 /* The container for text */
 .bio-summary {
-    max-width: 900px; /* Keeps line length readable */
+    max-width: 1100px; /* Keeps line length readable */
     margin: 40px auto;
     text-align: center;
     color: #4A5568;
@@ -367,6 +367,55 @@ a {
     font-weight: 400;
     
 }
+
+/* Split Layout for the detailed bio section */
+.bio-split {
+    display: flex;
+    align-items: center; /* Vertically centers the text with the image */
+    gap: 60px;          /* Space between text and image */
+    margin: 50px 0;
+    text-align: left;   /* Left alignment is much easier to read for long text */
+}
+
+.bio-text-side {
+    flex: 1; /* Takes up available space */
+}
+
+.bio-img-side {
+    flex: 1; /* Takes up available space */
+    display: flex;
+    justify-content: center;
+}
+
+/* Styling for the new secondary image */
+.action-img {
+    width: auto;
+    max-width: 150px; /* Prevents it from getting too huge */
+    border-radius: 12px;
+    max-height: 500px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+    transform: rotate(2deg); /* A tiny tilt adds a modern, dynamic feel */
+    transition: transform 0.3s ease;
+    display: inline-block; 
+}
+
+.action-img:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+/* Fix for mobile devices: Stack the bio split vertically */
+@media (max-width: 900px) {
+    .bio-split {
+        flex-direction: column-reverse; /* Put image on top of text on mobile */
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .bio-split {
+        text-align: center; /* Revert to center on mobile */
+    }
+}
+
 
 /* Standard paragraph spacing */
 .bio-summary p {
@@ -396,6 +445,47 @@ a {
     font-family: var(--font-header);
     border: 1px solid #CBD5E0;
 }
+
+
+.visual-break {
+    margin: 40px 0;      /* Generous space above and below */
+    text-align: center;  /* Center the image and caption */
+}
+
+.break-img {
+    width: 100%;         /* Fill the container width */
+    max-width: 800px;    /* But don't get impossibly huge on big screens */
+    height: auto;
+    border-radius: 12px; /* Smooth rounded corners */
+    box-shadow: 0 10px 30px -5px rgba(0,0,0,0.15); /* Cinematic shadow */
+    margin-bottom: 10px;
+    object-fit: cover;   /* Ensures image covers area nicely */
+}
+
+.visual-break figcaption {
+    font-size: 0.9rem;
+    color: #718096;      /* Subtle grey text */
+    font-style: italic;
+    font-family: var(--font-body);
+    margin-top: 8px;
+}
+
+/* Mobile Tweak: Make images slightly wider than text on phones */
+@media (max-width: 768px) {
+    .break-img {
+        width: 100vw;       /* Full viewport width */
+        margin-left: -20px; /* Pull left to ignore container padding */
+        margin-right: -20px;
+        border-radius: 0;   /* Square edges on full-width mobile look better */
+        max-width: none;
+    }
+    
+    .visual-break figcaption {
+        padding: 0 20px;    /* Restore padding for the caption text */
+    }
+}
+
+
 
 
 /* =========================================

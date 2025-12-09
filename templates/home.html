@@ -8,6 +8,7 @@
         <p class="subtitle-small">WITH A PASSION FOR DATA SCIENCE & AI ENGINEERING</p>
     </div>
 
+    <!-- Main Profile Picture -->
     <div class="profile-container">
        <img src="{{ url_for('static', filename='images/Arash_Selfie.png') }}" 
              alt="Arash Mirshahi" 
@@ -15,41 +16,53 @@
     </div>
 
     <div class="bio-summary">
+        <!-- Section 1: Introduction -->
         <p class="bio-lead">
-        <!-- 1. A brief introduction about yourself -->
             I specialize in building <strong>scalable AI systems</strong> and visualizing complex data. 
             My background in Cognitive Science helps me bridge the gap between 
             human intuition and machine learning models.
         </p>
 
-        <!-- Aspiration -->
+        <!-- VISUAL BREAK 1: Tech/Work Context -->
+        <figure class="visual-break">
+            <!-- Replace 'coding_setup.jpg' with an actual photo of your desk, code, or a project -->
+            <img src="{{ url_for('static', filename='images/placeholder.jpg') }}" alt="My Workspace" class="break-img">
+            <figcaption>placeholder</figcaption>
+        </figure>
+
+        <!-- Section 2: Philosophy & Education -->
         <p>
             I believe that becoming an impactful Data Scientist starts with a strong foundation in 
             <strong>Data Analysis</strong> and <strong>Engineering</strong>. While I enjoy building 
             software tools to sharpen my skills, my professional focus is on extracting meaningful 
             insights and constructing the robust data pipelines that make advanced AI possible.
         </p>
-        <!-- Cross-cultural and interdisciplinary approach  -->
+
         <p>
-            Having studied Cognitive Science & Artificial Intelligence at <strong>Tilburg University</strong>, a degree that attracted students from all over the world, I bring a cross-cultural perspective 
-            to my work. Moreover, my <strong>interdisciplinary</strong> education allows me to approach problems from multiple angles, 
-            combining technical expertise with an understanding of human behavior.
+            Having studied Cognitive Science & Artificial Intelligence at <strong>Tilburg University</strong>, 
+            I bring a cross-cultural perspective to my work. My <strong>interdisciplinary</strong> education 
+            allows me to approach problems from multiple angles, combining technical expertise with an 
+            understanding of human behavior.
         </p>
 
-        <!-- Hobbies -->
+        <!-- VISUAL BREAK 2: Personal/Hobby Context (The Statue Picture!) -->
+        <figure class="visual-break">
+            <!-- Replace 'florence_statue.jpg' with your photo -->
+            <img src="{{ url_for('static', filename='images/Arash David Italia.jpg') }}" alt="La galleria dell’accademia di firenze" class="break-img">
+            <figcaption>Exploring art and history gives me a sense of inspiration and creativity.</figcaption>
+        </figure>
+
+        <!-- Section 3: Hobbies & CTA -->
         <p>
             When I'm not coding, you can find me analyzing stocks, reading greek mythology, or lifting weights at the gym.
         </p>
 
-        <!-- Check Project/CV  -->
-         <p> 
-            <!-- Make sure the hyperlinks stand out -->
-            Feel free to check out my latest <a href="{{ url_for('projects') }}" style ="color: blue;"><u>projects</u></a> or view/download my <a href="{{ url_for('cv') }}" style ="color: blue;"><u>CV</u></a>.
- 
+        <p> 
+            Feel free to check out my latest <a href="{{ url_for('projects') }}" style ="color: var(--accent-color);"><u>projects</u></a> 
+            or view/download my <a href="{{ url_for('cv') }}" style ="color: var(--accent-color);"><u>CV</u></a>.
+        </p>
 
-         </p>
-
-        <!-- 4. A Mini 'Tech Stack' Section -->
+        <!-- Tech Stack -->
         <div class="tech-stack">
             <span class="tech-badge">Python</span>
             <span class="tech-badge">Flask</span>
@@ -61,5 +74,6 @@
             <span class="tech-badge">R</span>
             <span class="tech-badge">Agile</span>
         </div>
+    </div>
 </section>
 {% endblock %}
