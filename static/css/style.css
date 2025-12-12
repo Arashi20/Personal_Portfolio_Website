@@ -129,6 +129,8 @@ a {
     padding: 80px 20px; /* Reduced top padding slightly */
     max-width: 1000px;
     margin: 0 auto;
+
+    background: #FFFFFF;  /* Keep hero white for clean entrance */
 }
 
 .hero-text h1 {
@@ -377,6 +379,9 @@ a {
     text-align: center;
     color: #4A5568;
     padding: 0 20px;    /* Safety padding so text doesn't touch edge on phones */
+
+    background: #F7FAFC;   /* Very light gray-blue (subtle contrast) */
+    border-radius:  0;      /* Remove rounding for full-width sections */
 }
 
 /* The "Hook" paragraph */
@@ -386,6 +391,48 @@ a {
     margin-bottom: 20px;
     font-weight: 400;
     
+}
+
+/* Section grouping for better organization */
+.bio-section {
+    margin:  50px 0;         /* Space between sections */
+    text-align: left;       /* Left-align for better readability */
+    max-width: 800px;       /* Slightly narrower for optimal reading */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Section headings (subtle but effective) */
+.section-heading {
+    font-family: var(--font-header);
+    font-size: 1.5rem;             /* Smaller than h1, bigger than body */
+    font-weight: 700;              /* Bold but not too heavy */
+    color:  var(--accent-color);    /* Use your blue for consistency */
+    margin-bottom: 15px;           /* Space below heading */
+    margin-top: 0;                 /* No extra space above (controlled by . bio-section margin) */
+    letter-spacing: 0.5px;         /* Slight spacing for elegance */
+    position: relative;            /* For the underline effect */
+    padding-bottom: 10px;          /* Space for the underline */
+}
+
+/* Optional: Add a subtle underline accent */
+.section-heading::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom:  0;
+    width: 60px;                   /* Short accent line */
+    height: 3px;
+    background: var(--accent-color);
+    opacity: 0.3;                  /* Subtle, not overpowering */
+}
+
+/* Adjust standard paragraphs inside sections */
+.bio-section p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;             /* Slightly smaller than 1.25rem for better flow */
+    line-height: 1.8;
+    color: #4A5568;
 }
 
 /* Split Layout for the detailed bio section */
@@ -470,6 +517,8 @@ a {
 .visual-break {
     margin: 40px 0;      /* Generous space above and below */
     text-align: center;  /* Center the image and caption */
+
+    background: #FFFFFF;   /* White background for images */
 }
 
 .break-img {
@@ -880,5 +929,58 @@ a {
 
     .blog-card h2 {
         font-size: 1.25rem;
+    }
+}
+
+
+
+/* =========================================
+   FADE-IN ANIMATION (Works with animations.js)
+   ========================================= */
+
+   /**
+ * DEFAULT STATE: Hidden
+ * Sections start invisible and slightly below their final position
+ */
+.fade-in-section {
+    opacity:  0;                    /* Invisible by default */
+    transform:  translateY(30px);   /* Slightly below final position */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;  /* Smooth transition */
+}
+
+/**
+ * VISIBLE STATE: Fully visible
+ * Applied by JavaScript when element enters viewport
+ */
+.fade-in-section.is-visible {
+    opacity: 1;                    /* Fully visible */
+    transform: translateY(0);      /* At final position */
+}
+
+/**
+ * DELAY VARIANTS (Optional)
+ * Use these classes to stagger animations (e.g., for elements in a row)
+ */
+.fade-in-section.delay-1 {
+    transition-delay: 0.2s;        /* Starts 0.2s after entering viewport */
+}
+
+.fade-in-section.delay-2 {
+    transition-delay: 0.4s;
+}
+
+.fade-in-section.delay-3 {
+    transition-delay: 0.6s;
+}
+
+/**
+ * REDUCE MOTION FOR ACCESSIBILITY
+ * Respects user's preference for reduced motion (e.g., for vestibular disorders)
+ */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in-section {
+        opacity: 1;                /* Always visible */
+        transform: none;           /* No movement */
+        transition: none;          /* No animation */
     }
 }

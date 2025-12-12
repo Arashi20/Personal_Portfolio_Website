@@ -10,56 +10,68 @@
 
     <!-- Main Profile Picture -->
     <div class="profile-container">
-       <img src="{{ url_for('static', filename='images/Arash_Selfie.png') }}" 
-             alt="Arash Mirshahi" 
-             class="profile-img">
+        <img src="{{ url_for('static', filename='images/Arash_Selfie.png') }}" alt="Arash Mirshahi" class="profile-img">
     </div>
 
     <div class="bio-summary">
         <!-- Section 1: Introduction -->
-        <p class="bio-lead">
-            I specialize in building <strong>scalable AI systems</strong> and visualizing complex data. 
-            My background in Cognitive Science helps me bridge the gap between 
+        <p class="bio-lead fade-in-section">
+            I specialize in building <strong>scalable AI systems</strong> and visualizing complex data.
+            My background in Cognitive Science helps me bridge the gap between
             human intuition and machine learning models.
         </p>
 
         <!-- VISUAL BREAK 1: Tech/Work Context (optional) -->
-       
 
-        <!-- Section 2: Philosophy & Education -->
-        <p>
-            I believe that becoming an impactful Data Scientist starts with a strong foundation in 
-            <strong>Data Analysis</strong> and <strong>Engineering</strong>. While I enjoy building 
-            software tools to sharpen my skills, my professional focus is on extracting meaningful 
-            insights and constructing the robust data pipelines that make advanced AI possible.
-        </p>
 
-        <p>
-            Having studied Cognitive Science & Artificial Intelligence at <strong>Tilburg University</strong>, 
-            I bring a cross-cultural perspective to my work. My <strong>interdisciplinary</strong> education 
-            allows me to approach problems from multiple angles, combining technical expertise with an 
-            understanding of human behavior.
-        </p>
+
+        <!-- SECTION 2: Philosophy -->
+        <div class="bio-section fade-in-section">
+            <h3 class="section-heading">My Approach</h3>
+            <p>
+                I believe that becoming an impactful Data Scientist starts with a strong foundation in
+                <strong>Data Analysis</strong> and <strong>Engineering</strong>. While I enjoy building
+                software tools to sharpen my skills, my professional focus is on extracting meaningful
+                insights and constructing the robust data pipelines that make advanced AI possible.
+            </p>
+        </div>
+
+        <!-- SECTION 3: Background -->
+        <div class="bio-section fade-in-section">
+            <h3 class="section-heading">Background & Education</h3>
+            <p>
+                Having studied Cognitive Science & Artificial Intelligence at <strong>Tilburg University</strong>,
+                I bring a cross-cultural perspective to my work. My <strong>interdisciplinary</strong> education
+                allows me to approach problems from multiple angles, combining technical expertise with an
+                understanding of human behavior.
+            </p>
+        </div>
 
         <!-- VISUAL BREAK 2: Personal/Hobby Context (The Statue Picture!) -->
-        <figure class="visual-break">
+        <figure class="visual-break fade-in-section">
             <!-- Replace 'florence_statue.jpg' with your photo -->
-            <img src="{{ url_for('static', filename='images/Arash David Italia.jpg') }}" alt="La galleria dell’accademia di firenze" class="break-img">
+            <img src="{{ url_for('static', filename='images/Arash David Italia.jpg') }}"
+                alt="La galleria dell’accademia di firenze" class="break-img">
             <figcaption>Exploring art and history gives me a sense of inspiration and creativity.</figcaption>
         </figure>
 
-        <!-- Section 3: Hobbies & CTA -->
-        <p>
-            When I'm not coding, you can find me analyzing stocks, reading greek mythology, or lifting weights at the gym.
-        </p>
+        <!-- SECTION 4: Interests -->
+        <div class="bio-section fade-in-section">
+            <h3 class="section-heading">Beyond Data Science</h3>
+            <p>
+                When I'm not coding, you can find me analyzing stocks, reading Greek mythology, or lifting weights at
+                the gym.
+            </p>
+            <p>
+                Feel free to check out my latest <a href="{{ url_for('projects') }}"
+                    style="color: var(--accent-color);"><u>projects</u></a>
+                or view/download my <a href="{{ url_for('cv') }}" style="color: var(--accent-color);"><u>CV</u></a>.
+            </p>
+        </div>
 
-        <p> 
-            Feel free to check out my latest <a href="{{ url_for('projects') }}" style ="color: var(--accent-color);"><u>projects</u></a> 
-            or view/download my <a href="{{ url_for('cv') }}" style ="color: var(--accent-color);"><u>CV</u></a>.
-        </p>
-
+        
         <!-- Tech Stack -->
-        <div class="tech-stack">
+        <div class="tech-stack fade-in-section">
             <span class="tech-badge">Python</span>
             <span class="tech-badge">Flask</span>
             <span class="tech-badge">GenAI</span>
