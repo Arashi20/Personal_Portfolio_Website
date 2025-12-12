@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}404 - Page Not Found | Arash Mirshahi{% endblock %}
+
+{% block content %}
+<!-- 
+    ============================================
+    404 ERROR PAGE
+    ============================================
+    
+    PURPOSE: 
+    This page is shown when a user tries to access a URL that doesn't exist.
+    Examples: 
+    - Deleted blog post
+    - Typo in URL (e.g., /projcts instead of /projects)
+    - Old link that's no longer valid
+    
+    DESIGN PHILOSOPHY:
+    - Friendly and approachable (not technical/scary)
+    - Provides clear navigation back to valid pages
+    - Maintains consistent branding with the rest of the site
+    - Has a touch of personality (not generic)
+    
+    AUTHOR:  Arash Mirshahi
+    DATE: 2025-12-12
+    ============================================
+-->
+
+<section class="error-page">
+    <div class="error-container">
+        
+        <!-- 404 Icon/Number (Big and Bold) -->
+        <div class="error-code">
+            <h1>404</h1>
+        </div>
+        
+        <!-- Main Error Message -->
+        <h2 class="error-title">Page Not Found</h2>
+        
+        <!-- Friendly Explanation -->
+        <p class="error-description">
+            Looks like you've wandered into uncharted territory. 
+            The page you're looking for might have been moved, deleted, or never existed.
+        </p>
+        
+        <!-- Helpful Suggestions -->
+        <p class="error-suggestion">
+            No worries – let's get you back on track!  
+        </p>
+        
+        <!-- Navigation Options (Button Grid) -->
+        <div class="error-actions">
+            <a href="{{ url_for('home') }}" class="error-btn primary">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="{{ url_for('projects') }}" class="error-btn">
+                <i class="fas fa-code"></i> Projects
+            </a>
+            <a href="{{ url_for('cv') }}" class="error-btn">
+                <i class="fas fa-file-alt"></i> CV
+            </a>
+            <a href="{{ url_for('blog') }}" class="error-btn">
+                <i class="fas fa-blog"></i> Blog
+            </a>
+        </div>
+        
+        <!-- Optional: Search Box (if you add search functionality later) -->
+        <!-- 
+        <div class="error-search">
+            <p class="error-search-label">Or try searching:</p>
+            <input type="text" placeholder="Search..." class="error-search-input">
+            <button class="error-search-btn">Search</button>
+        </div>
+        -->
+        
+        <!-- Fun Easter Egg (Optional) -->
+        <div class="error-footer">
+            <p class="error-hint">
+                <em>Tip:  If you think this page should exist, feel free to 
+                <a href="https://github.com/Arashi20" target="_blank" style="color: var(--accent-color);">let me know</a>!</em>
+            </p>
+        </div>
+        
+    </div>
+</section>
+
+{% endblock %}

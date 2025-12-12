@@ -100,8 +100,19 @@ def post(title):
             # Pass the HTML content and the title to the template
             return render_template('post.html', content=html_content, title=title)
     else:
-        # Simple 404 handling for now
-        return "Post not found", 404
+        return render_template('404.html'), 404 
+    
+
+@app.errorhandler(404)
+def page_not_found(error):
+    """
+    Custom 404 error page handler.
+    Shows a user-friendly error page instead of Flask's default.
+    """
+    # Render the custom 404 template
+    return render_template('404.html'), 404
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

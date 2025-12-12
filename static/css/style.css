@@ -988,3 +988,281 @@ a {
         transition: none;          /* No animation */
     }
 }
+
+
+
+/* =========================================
+   10. 404 ERROR PAGE STYLING
+   ========================================= */
+
+/**
+ * ERROR PAGE CONTAINER
+ * Centers the error content and provides consistent spacing
+ */
+.error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;          /* Takes up most of the viewport (pushes footer down) */
+    padding: 60px 20px;
+    background: #FAFAFA;       /* Matches your body background */
+    flex:  1;                   /* Allows footer to stick to bottom */
+}
+
+. error-container {
+    max-width: 700px;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/**
+ * ERROR CODE (The big "404")
+ * Makes the number visually striking
+ */
+.error-code h1 {
+    font-family: var(--font-header);
+    font-size: 10rem;          /* Huge!  */
+    font-weight: 900;          /* Extra bold */
+    color: var(--accent-color); /* Your tech blue */
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -5px;      /* Tight spacing for impact */
+    
+    /* Optional: Add a subtle text shadow for depth */
+    text-shadow: 0 4px 8px rgba(49, 130, 206, 0.2);
+}
+
+/**
+ * ERROR TITLE ("Page Not Found")
+ * Secondary heading below the 404 number
+ */
+.error-title {
+    font-family: var(--font-header);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2D3748;
+    margin: 20px 0 30px 0;
+    letter-spacing: -0.5px;
+}
+
+/**
+ * ERROR DESCRIPTION
+ * Explains what happened in friendly language
+ */
+.error-description {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: #4A5568;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/**
+ * ERROR SUGGESTION
+ * Encourages user to navigate elsewhere
+ */
+.error-suggestion {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: #718096;
+    margin-bottom:  40px;
+    font-weight: 600;
+}
+
+/**
+ * ERROR ACTIONS (Navigation Buttons)
+ * Grid of buttons to navigate back to valid pages
+ */
+.error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom:  40px;
+}
+
+/**
+ * ERROR BUTTON STYLING
+ * Consistent button design matching your site's aesthetic
+ */
+.error-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: var(--font-header);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #2D3748;
+    background: #FFFFFF;
+    border: 2px solid #E2E8F0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    
+    /* Prevent text selection (makes it feel more button-like) */
+    user-select: none;
+}
+
+.error-btn:hover {
+    transform: translateY(-3px);   /* Lift effect on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/**
+ * PRIMARY BUTTON (Home button)
+ * Stands out as the main call-to-action
+ */
+.error-btn.primary {
+    background: var(--accent-color);
+    color: #FFFFFF;
+    border-color: var(--accent-color);
+}
+
+.error-btn.primary:hover {
+    background: #2c5aa0;       /* Slightly darker blue on hover */
+    border-color: #2c5aa0;
+    color: #FFFFFF;
+}
+
+/**
+ * BUTTON ICONS
+ * Ensures Font Awesome icons are properly sized
+ */
+.error-btn i {
+    font-size: 1.1rem;
+}
+
+/**
+ * ERROR FOOTER (Optional hint/easter egg)
+ * Subtle message at the bottom
+ */
+. error-footer {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top:  1px solid #E2E8F0;
+}
+
+. error-hint {
+    font-size: 0.9rem;
+    color: #A0AEC0;
+    font-style: italic;
+}
+
+.error-hint a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.error-hint a:hover {
+    color: #2c5aa0;
+}
+
+/**
+ * OPTIONAL: SEARCH BOX STYLING
+ * Uncomment these styles if you add the search box later
+ */
+/*
+.error-search {
+    margin:  40px 0;
+    text-align: center;
+}
+
+.error-search-label {
+    font-size: 1rem;
+    color: #4A5568;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.error-search-input {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: 2px solid #E2E8F0;
+    border-radius: 8px 0 0 8px;
+    width: 300px;
+    max-width: 100%;
+    font-family: var(--font-body);
+}
+
+.error-search-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.error-search-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-family: var(--font-header);
+    font-weight: 700;
+    background: var(--accent-color);
+    color: #FFFFFF;
+    border: 2px solid var(--accent-color);
+    border-radius:  0 8px 8px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: -2px;
+}
+
+.error-search-btn:hover {
+    background: #2c5aa0;
+    border-color: #2c5aa0;
+}
+*/
+
+/**
+ * MOBILE RESPONSIVENESS
+ * Adjusts sizing and layout for smaller screens
+ */
+@media (max-width: 768px) {
+    
+    /* Reduce the giant 404 number on mobile */
+    .error-code h1 {
+        font-size: 6rem;       /* Smaller than 10rem on desktop */
+        letter-spacing: -3px;
+    }
+    
+    /* Reduce title size */
+    .error-title {
+        font-size: 2rem;
+    }
+    
+    /* Reduce description size */
+    .error-description {
+        font-size: 1.1rem;
+    }
+    
+    /* Stack buttons vertically on very small screens */
+    .error-actions {
+        flex-direction:  column;
+        align-items: stretch;  /* Full-width buttons on mobile */
+    }
+    
+    . error-btn {
+        width:  100%;           /* Full-width buttons */
+        justify-content: center;
+    }
+    
+    /* Reduce padding on mobile */
+    .error-page {
+        padding: 40px 15px;
+        min-height: 60vh;
+    }
+}
+
+/**
+ * EXTRA SMALL SCREENS (< 400px)
+ * Further adjustments for tiny phones
+ */
+@media (max-width: 400px) {
+    . error-code h1 {
+        font-size: 4.5rem;     /* Even smaller for tiny screens */
+    }
+    
+    .error-title {
+        font-size:  1.75rem;
+    }
+}
