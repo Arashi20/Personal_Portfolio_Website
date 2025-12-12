@@ -301,6 +301,13 @@ a {
         font-size: 1.1rem;
     }
 
+    /* Reduce excessive spacing between navbar and hero content */
+    .hero {
+        padding: 30px 20px;     /* 👈 Reduced from 80px to 30px (top/bottom) */
+    }
+
+
+
     /* Optimize CV Page on smaller devices */
 
     /* 1. Give the container more breathing room */
@@ -342,6 +349,19 @@ a {
     
     .cv-details ul {
         padding-left: 15px; /* Save space on indentation */
+    }
+
+    /* 👇 ADD THIS:  Fix containers that might cause overflow 👇 */
+    .bio-summary {
+        padding: 0 15px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .content-container {
+        padding: 0 15px;
+        max-width:  100%;
+        overflow-x: hidden;
     }
 
 }
@@ -453,13 +473,15 @@ a {
 }
 
 .break-img {
-    width: 100%;         /* Fill the container width */
-    max-width: 800px;    /* But don't get impossibly huge on big screens */
-    height: auto;
-    border-radius: 12px; /* Smooth rounded corners */
-    box-shadow: 0 10px 30px -5px rgba(0,0,0,0.15); /* Cinematic shadow */
-    margin-bottom: 10px;
-    object-fit: cover;   /* Ensures image covers area nicely */
+    width:  auto;         /* 👈 CHANGED:  Let width be automatic */
+    max-width: 600px;    /* Still limit max width */
+    max-height: 500px;   /* 👈 CHANGED: Use max-height instead of fixed height */
+    height: auto;        /* 👈 ADDED: Let height scale naturally */
+    border-radius: 12px; 
+    box-shadow: 0 10px 30px -5px rgba(0,0,0,0.15); 
+    margin: 0 auto 10px auto;  /* 👈 CHANGED: Center the image horizontally */
+    object-fit:  contain;   
+    display: block;      /* 👈 ADDED: Required for centering */
 }
 
 .visual-break figcaption {
@@ -473,19 +495,91 @@ a {
 /* Mobile Tweak: Make images slightly wider than text on phones */
 @media (max-width: 768px) {
     .break-img {
-        width: 100vw;       /* Full viewport width */
-        margin-left: -20px; /* Pull left to ignore container padding */
-        margin-right: -20px;
-        border-radius: 0;   /* Square edges on full-width mobile look better */
-        max-width: none;
+        width: auto;           /* 👈 CHANGED: Let it scale naturally */
+        max-width:  90vw;       /* 👈 CHANGED:  Use 90% of screen width (leaves breathing room) */
+        max-height: 450px;     /* 👈 ADDED: Limit height on mobile too */
+        height: auto;          /* 👈 ADDED:  Scale proportionally */
+        margin-left: auto;     /* 👈 CHANGED: Center horizontally */
+        margin-right: auto;    /* 👈 CHANGED: Center horizontally */
+        border-radius:  12px;   /* 👈 CHANGED: Keep rounded corners on mobile */
     }
     
     .visual-break figcaption {
         padding: 0 20px;    /* Restore padding for the caption text */
     }
+
+
+
+/* Fix for very small screens (< 500px): Prevent horizontal overflow */
+    @media (max-width: 500px) {
+    .visual-break {
+        margin: 40px 0;          /* 👈 CHANGED: Remove negative margin (it was pulling image left) */
+        padding: 0;
+        max-width: 100vw;
+        overflow:  hidden;
+        text-align: center;      /* 👈 ADDED: Centers the image horizontally */
+    }
+
+    .break-img {
+        max-width: 90vw;         /* 👈 CHANGED: 90vw instead of 100vw (leaves breathing room) */
+        max-height: 500px;       /* 👈 ADDED: Prevents image from being too tall */
+        height: auto;            /* 👈 ADDED: Maintains aspect ratio */
+        border-radius: 8px;      /* 👈 CHANGED: Keep slight rounding (looks better than 0) */
+        margin: 0 auto;          /* 👈 CHANGED: Centers horizontally (auto left/right margins) */
+        display: block;          /* 👈 ADDED: Required for margin: auto to work */
+    }
+
+    .visual-break figcaption {
+        padding: 10px 20px;
+        margin: 0;
+        text-align: center;      /* 👈 ADDED:  Centers caption text */
+    }
+  }
+
+  /* =========================================
+   Extra Fix for Tiny Screens (< 412px)
+   Prevents image corners from being cut off
+   ========================================= */
+@media (max-width: 440px) {
+    
+    /* Force visual break container to never overflow */
+    .visual-break {
+        margin: 40px 0;          /* No horizontal margin */
+        padding: 0;              /* No padding that could push content */
+        max-width: 100vw;        /* Never exceed viewport */
+        overflow: hidden;        /* Clip anything that tries to overflow */
+        text-align: center;      /* Center the image */
+    }
+
+    /* Constrain image more strictly */
+    .break-img {
+        width: auto;             /* Let it scale naturally */
+        max-width: 85vw;         /* 👈 REDUCED from 90vw to 85vw (more breathing room) */
+        max-height: 450px;       /* Slightly reduce height for tiny screens */
+        height: auto;            /* Maintain aspect ratio */
+        border-radius: 8px;      /* Keep rounded corners */
+        margin: 0 auto;          /* Center horizontally */
+        display: block;          /* Required for centering */
+        object-fit: contain;     /* 👈 ADDED:  Ensures entire image is visible without cropping */
+    }
+
+    /* Ensure caption stays within bounds */
+    .visual-break figcaption {
+        padding: 10px 15px;      /* Slightly reduce horizontal padding */
+        margin: 0;
+        text-align: center;
+        max-width: 100%;         /* Don't exceed container */
+    }
+
+    /* 👇 EXTRA SAFETY:   Ensure bio-summary container doesn't cause overflow */
+    .bio-summary {
+        padding: 0 10px;         /* Reduce padding on tiny screens */
+        max-width: 100%;
+        overflow-x: hidden;      /* Hide any horizontal overflow */
+    }
 }
 
-
+}
 
 
 /* =========================================
@@ -533,6 +627,16 @@ a {
         padding: 15px;
         gap: 10px;
         text-align: center;
+    }
+
+    .footer-left {
+        font-size: 0.85rem;      /* 👈 Slightly smaller text on mobile */
+        margin:  0;               /* 👈 Remove any default margins */
+    }
+
+    .footer-right {
+        gap: 20px;               /* 👈 Reduce gap between social icons (was 25px on desktop) */
+        margin:  0;               /* 👈 Remove any default margins */
     }
 }
 
