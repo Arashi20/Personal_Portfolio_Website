@@ -938,28 +938,31 @@ a {
    FADE-IN ANIMATION (Works with animations.js)
    ========================================= */
 
-   /**
+/**
  * DEFAULT STATE: Hidden
- * Sections start invisible and slightly below their final position
+ * Sections start invisible and slightly below their final position.
+ * This is the state BEFORE JavaScript adds the 'is-visible' class.
  */
 .fade-in-section {
-    opacity:  0;                    /* Invisible by default */
-    transform:  translateY(30px);   /* Slightly below final position */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;  /* Smooth transition */
+    opacity: 0;                    /* Invisible by default */
+    transform: translateY(30px);   /* Slightly below final position (moves up during fade) */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;  /* Smooth 0.8s transition */
 }
 
 /**
  * VISIBLE STATE: Fully visible
- * Applied by JavaScript when element enters viewport
+ * Applied by JavaScript when element enters viewport.
+ * JavaScript adds the 'is-visible' class, which triggers this CSS.
  */
 .fade-in-section.is-visible {
     opacity: 1;                    /* Fully visible */
-    transform: translateY(0);      /* At final position */
+    transform: translateY(0);      /* At final position (no offset) */
 }
 
 /**
- * DELAY VARIANTS (Optional)
- * Use these classes to stagger animations (e.g., for elements in a row)
+ * DELAY VARIANTS (Optional - not currently used)
+ * Use these classes to stagger animations (e.g., for elements in a row).
+ * Example: <div class="fade-in-section delay-1">
  */
 .fade-in-section.delay-1 {
     transition-delay: 0.2s;        /* Starts 0.2s after entering viewport */
@@ -974,12 +977,13 @@ a {
 }
 
 /**
- * REDUCE MOTION FOR ACCESSIBILITY
- * Respects user's preference for reduced motion (e.g., for vestibular disorders)
+ * ACCESSIBILITY:  Respect user's motion preferences
+ * If user has "reduce motion" enabled in their OS settings,
+ * skip all animations and show content immediately.
  */
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion:  reduce) {
     .fade-in-section {
-        opacity: 1;                /* Always visible */
+        opacity:  1;                /* Always visible (no fade) */
         transform: none;           /* No movement */
         transition: none;          /* No animation */
     }
