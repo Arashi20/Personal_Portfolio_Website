@@ -2,7 +2,7 @@
    1. Global Variables & Reset
    ========================================= */
 :root {
-    --bg-color: #FAFAFA;      
+    --bg-color: #F0F4F8;    
     --text-color: #2D3748;    
     --accent-color: #3182ce;  /* The Techy Blue */
     
@@ -131,6 +131,11 @@ a {
     margin: 0 auto;
 
     background: #FFFFFF;  /* Keep hero white for clean entrance */
+
+    border-left: 2px solid #D1E7FF;
+    border-right: 2px solid #D1E7FF;
+    border-top: 2px solid #D1E7FF;
+    border-bottom: 2px solid #D1E7FF;
 }
 
 .hero-text h1 {
@@ -183,11 +188,33 @@ a {
 }
 
 .profile-img {
-    width: 280px;
-    height: 280px;
+    /* Responsive width - scales down on small screens */
+    width:  280px;              /* Default size (desktop) */
+    max-width: 70vw;           /* 👈 ADDED:  Never exceeds 70% of viewport width */
+    
+    /* Maintain 1:1 aspect ratio (perfect circle) */
+    height: auto;              /* 👈 CHANGED: Auto height maintains aspect ratio */
+    aspect-ratio: 1 / 1;       /* 👈 ADDED: Forces square shape (modern browsers) */
+    
+    /* Circular shape */
     border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    object-fit: cover;         /* Ensures image fills circle without distortion */
+    
+    /* Visual polish */
+    border: 5px solid #FFFFFF;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    
+    /* Centering */
+    margin: 0 auto;
+    display: block;            /* 👈 ADDED: Required for margin:  auto centering */
+}
+
+/* Center the image for devices smaller than 321px */
+@media (max-width: 320px) {
+    .profile-img {
+        margin-left: 12px;
+        margin-right: 160px;
+    }
 }
 
 /* =========================================
@@ -374,28 +401,41 @@ a {
 
 /* The container for text */
 .bio-summary {
-    max-width: 1100px; /* Keeps line length readable */
-    margin: 40px auto;
+    width: 100%;           /* 👈 CHANGED: Full-width (no white edges) */
+    margin: 0;             /* 👈 CHANGED:   Remove margins */
     text-align: center;
-    color: #4A5568;
-    padding: 0 20px;    /* Safety padding so text doesn't touch edge on phones */
+    color: #2D3748;        /* 👈 CHANGED:   Darker text for better contrast */
+    padding: 40px 20px 60px 20px;
+    background: #E6F2FF;   /* 👈 CHANGED:  Light blue (branded feel) */
+    border-radius:  0;
+    
+    /* borders for the container  */
+    border-top: 2px solid #D1E7FF;
+    border-bottom: 2px solid #D1E7FF;
+    border-left: 2px solid #D1E7FF;
+    border-right: 2px solid #D1E7FF;
+}
 
-    background: #F7FAFC;   /* Very light gray-blue (subtle contrast) */
-    border-radius:  0;      /* Remove rounding for full-width sections */
+
+/* Keep bio content centered (text, sections, etc.) */
+.bio-summary > *:not(.visual-break) {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* The "Hook" paragraph */
 .bio-lead {
     font-size: 1.35rem; /* Slightly larger than normal text */
     color: #2D3748;     /* Darker color for emphasis */
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     font-weight: 400;
     
 }
 
 /* Section grouping for better organization */
 .bio-section {
-    margin:  50px 0;         /* Space between sections */
+    margin:  20px 0;         /* Space between sections */
     text-align: left;       /* Left-align for better readability */
     max-width: 800px;       /* Slightly narrower for optimal reading */
     margin-left: auto;
@@ -413,18 +453,20 @@ a {
     letter-spacing: 0.5px;         /* Slight spacing for elegance */
     position: relative;            /* For the underline effect */
     padding-bottom: 10px;          /* Space for the underline */
+    text-align: center;            /* Center the section headings */
 }
 
 /* Optional: Add a subtle underline accent */
 .section-heading::after {
     content: '';
     position: absolute;
-    left: 0;
-    bottom:  0;
-    width: 60px;                   /* Short accent line */
-    height: 3px;
+    left: 50%;              /* 👈 CHANGED:  Center the underline */
+    transform: translateX(-50%);  /* 👈 CHANGED:   Center the underline */
+    bottom: 0;
+    width: 80px;            /* 👈 CHANGED:   Longer line (was 60px) */
+    height: 3px;            /* 👈 CHANGED:   Thicker line (was 3px at 0.3 opacity) */
     background: var(--accent-color);
-    opacity: 0.3;                  /* Subtle, not overpowering */
+    opacity: 1;             /* 👈 CHANGED:   Fully opaque (was 0.3) */
 }
 
 /* Adjust standard paragraphs inside sections */
@@ -476,10 +518,15 @@ a {
         flex-direction: column-reverse; /* Put image on top of text on mobile */
         flex-direction: column;
         gap: 30px;
+        
     }
     
     .bio-split {
         text-align: center; /* Revert to center on mobile */
+    }
+
+    .tech-stack {
+        margin-bottom: 20px; /* Reduce margin on mobile */
     }
 }
 
@@ -503,22 +550,32 @@ a {
 
 /* Individual Badges */
 .tech-badge {
-    background-color: #EDF2F7; /* Light gray background */
-    color: #2D3748;
-    padding: 6px 12px;
-    border-radius: 20px;       /* Pill shape */
+    background-color: #EBF5FF;           /* 👈 CHANGED:  Light blue tint (was gray) */
+    color: #2c5aa0;                      /* 👈 CHANGED:  Darker blue text (was dark gray) */
+    padding: 8px 16px;                   /* 👈 CHANGED:  Slightly larger (was 6px 12px) */
+    border-radius: 20px;                 /* Pill shape */
     font-size: 0.9rem;
     font-weight: 600;
     font-family: var(--font-header);
-    border: 1px solid #CBD5E0;
+    border: 1px solid #bee3f8;           /* 👈 CHANGED: Blue border (was gray) */
+    
+    /* 👇 ADDED: Hover effect */
+    transition: all 0.3s ease;
 }
+
+.tech-badge:hover {
+    background-color: #bee3f8;           /* Slightly darker on hover */
+    transform: translateY(-2px);         /* Subtle lift */
+    box-shadow: 0 4px 8px rgba(49, 130, 206, 0.2);
+}
+
 
 
 .visual-break {
     margin: 40px 0;      /* Generous space above and below */
     text-align: center;  /* Center the image and caption */
 
-    background: #FFFFFF;   /* White background for images */
+       
 }
 
 .break-img {
@@ -835,6 +892,11 @@ a {
 .blog-header {
     text-align: center;
     margin-bottom: 50px;
+    border-left: 2px solid #D1E7FF;
+    border-right: 2px solid #D1E7FF;
+    border-top: 2px solid #D1E7FF;
+    border-bottom: 2px solid #D1E7FF;
+    background: #FFFFFF;
 }
 
 .blog-header h1 {
