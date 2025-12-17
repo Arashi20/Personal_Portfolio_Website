@@ -166,7 +166,7 @@ a {
 
 /* -- Profile Picture Area -- */
 .profile-container {
-    margin: 50px auto;
+    margin: 40px auto;
     width: 280px;
     height: 280px;
     
@@ -210,10 +210,19 @@ a {
 }
 
 /* Center the image for devices smaller than 321px */
-@media (max-width: 320px) {
+@media (max-width: 340px) {
     .profile-img {
         margin-left: 12px;
         margin-right: 160px;
+        
+    }
+    /* Reduce profile-container vertical spacing */
+    .profile-container {
+        /* much smaller top/bottom space on tiny phones */
+        margin: 12px auto;
+        /* let contents size naturally on small screens */
+        width: auto;
+        height: auto;
     }
 }
 
@@ -343,6 +352,13 @@ a {
     .cv-container {
         padding: 20px;      /* Reduced from 40px to save space */
         margin: 20px auto;  /* Reduce outer margin */
+
+
+        /* borders for the container  */
+        border-top: 2px solid #D1E7FF;
+        border-bottom: 2px solid #D1E7FF;
+        border-left: 2px solid #D1E7FF;
+        border-right: 2px solid #D1E7FF;
     }
 
     /* 2. Stack the Header (Title on top, Button on bottom) */
@@ -415,6 +431,39 @@ a {
     border-left: 2px solid #D1E7FF;
     border-right: 2px solid #D1E7FF;
 }
+
+.bio-summary a,
+.content-container a {
+    color: var(--accent-color);
+    font-family: var(--font-header);
+    font-weight: 700;             /* match headings/badges */
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    transition: color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    letter-spacing: 0.2px;
+}
+
+.bio-summary a:hover,
+.bio-summary a:focus,
+.content-container a:hover,
+.content-container a:focus {
+    color: #256bb5; /* slightly darker for hover feedback */
+    border-color: rgba(49,130,206,0.25);
+    transform: translateY(-1px);
+}
+
+.bio-summary a:focus-visible,
+.content-container a:focus-visible {
+    box-shadow: 0 0 0 3px rgba(49,130,206,0.12);
+    border-color: var(--accent-color);
+}
+
+.bio-summary a:visited,
+.content-container a:visited {
+    color: rgba(49,130,206,0.85);
+}
+
 
 
 /* Keep bio content centered (text, sections, etc.) */
@@ -557,7 +606,7 @@ a {
     font-size: 0.9rem;
     font-weight: 600;
     font-family: var(--font-header);
-    border: 1px solid #bee3f8;           /* 👈 CHANGED: Blue border (was gray) */
+    border: 1px solid #93aab8;           /* 👈 CHANGED: Blue border (was gray) */
     
     /* 👇 ADDED: Hover effect */
     transition: all 0.3s ease;
@@ -757,6 +806,12 @@ a {
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     color: #333;
+
+    /* borders for the container  */
+    border-top: 2px solid #D1E7FF;
+    border-bottom: 2px solid #D1E7FF;
+    border-left: 2px solid #D1E7FF;
+    border-right: 2px solid #D1E7FF;
 }
 
 /* Header layout */
@@ -776,13 +831,16 @@ a {
 }
 
 .btn-download {
-    background-color: #333;
+    /* White button background */
+    background-color: #ffffff;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     transition: background 0.3s;
+    
+    
 }
 
 .btn-download:hover {
@@ -897,6 +955,14 @@ a {
     border-top: 2px solid #D1E7FF;
     border-bottom: 2px solid #D1E7FF;
     background: #FFFFFF;
+
+    padding: 40px 60px; /* Generous padding for emphasis */
+
+
+    border-radius: 6px;                 /* subtle rounding like other cards */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+
+    
 }
 
 .blog-header h1 {
@@ -982,7 +1048,7 @@ a {
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     .blog-header h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
     .blog-card {
@@ -992,6 +1058,7 @@ a {
     .blog-card h2 {
         font-size: 1.25rem;
     }
+    
 }
 
 
@@ -1069,12 +1136,20 @@ a {
     padding: 60px 20px;
     background: #FAFAFA;       /* Matches your body background */
     flex:  1;                   /* Allows footer to stick to bottom */
+    
+
+    /* borders for the container  */
+    border-top: 2px solid #D1E7FF;
+    border-bottom: 2px solid #D1E7FF;
+    border-left: 2px solid #D1E7FF;
+    border-right: 2px solid #D1E7FF;
 }
 
-. error-container {
+.error-container {
     max-width: 700px;
     text-align: center;
     padding: 40px 20px;
+    
 }
 
 /**
@@ -1161,9 +1236,10 @@ a {
     border: 2px solid #E2E8F0;
     border-radius: 8px;
     transition: all 0.3s ease;
-    
-    /* Prevent text selection (makes it feel more button-like) */
     user-select: none;
+
+    /* Ensure consistent border visibility */
+    border-bottom: 2px solid transparent;
 }
 
 .error-btn:hover {
@@ -1171,21 +1247,25 @@ a {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border-color: var(--accent-color);
     color: var(--accent-color);
+
+    /* Make the bottom border visible on hover */
+    border-bottom: 2px solid var(--accent-color);
 }
+
 
 /**
  * PRIMARY BUTTON (Home button)
  * Stands out as the main call-to-action
  */
 .error-btn.primary {
-    background: var(--accent-color);
+    background: #1A202C;
     color: #FFFFFF;
-    border-color: var(--accent-color);
+    border-color: #1A202C;
 }
 
 .error-btn.primary:hover {
     background: #2c5aa0;       /* Slightly darker blue on hover */
-    border-color: #2c5aa0;
+    border-color: #1A202C;
     color: #FFFFFF;
 }
 
@@ -1201,13 +1281,13 @@ a {
  * ERROR FOOTER (Optional hint/easter egg)
  * Subtle message at the bottom
  */
-. error-footer {
+.error-footer {
     margin-top: 60px;
     padding-top: 30px;
     border-top:  1px solid #E2E8F0;
 }
 
-. error-hint {
+.error-hint {
     font-size: 0.9rem;
     color: #A0AEC0;
     font-style: italic;
@@ -1215,7 +1295,6 @@ a {
 
 .error-hint a {
     color: var(--accent-color);
-    text-decoration: underline;
     transition: color 0.3s ease;
 }
 
