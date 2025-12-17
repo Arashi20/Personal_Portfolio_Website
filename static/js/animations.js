@@ -1,264 +1,254 @@
 /**
  * ============================================
- * FADE-IN ON SCROLL ANIMATION (Simplified)
+ * FADE-IN ON SCROLL (IntersectionObserver + safe fallback)
  * ============================================
- * 
- * PURPOSE: 
- * Makes sections fade in smoothly as the user scrolls down the page. 
- * 
- * HOW IT WORKS:
- * 1. Elements with 'fade-in-section' class start invisible (CSS:  opacity: 0)
- * 2. On page load, we check which elements are in viewport → show them
- * 3. On every scroll, we check again → show newly visible elements
- * 4. Once an element is shown, we stop checking it (performance)
- * 
- * WHY THIS VERSION: 
- * - No IntersectionObserver complexity
- * - Direct scroll event listener (more reliable)
- * - Immediate feedback (no delay)
- * - Works on ALL browsers (even old ones)
- * 
- * AUTHOR: Arash Mirshahi
- * DATE: 2025-12-12
+ *
+ * Replaces the scroll-only approach with IntersectionObserver where supported.
+ * IntersectionObserver reliably notifies when elements enter/leave the viewport,
+ * so "fast scroll" cases (short intersections) are detected correctly.
+ *
+ * Fallback: For older browsers without IntersectionObserver, a throttled
+ * scroll-based approach is included (improved from the prior version).
+ *
+ * NOTES:
+ * - Elements to animate: .fade-in-section
+ * - Visible class added: .is-visible (CSS should contain transitions)
+ * - Tweak rootMargin or threshold below to change when animations trigger.
+ *
+ * Author: Arash Mirshahi (keeps attribution)
+ * Updated: 2025-12-17 (IntersectionObserver fallback + robustness)
  * ============================================
  */
 
-// ============================================
-// GLOBAL VARIABLES
-// ============================================
+/* ------------------------------
+   Configuration: tweak these
+   ------------------------------ */
+const OBSERVER_ROOT = null;                            // viewport
+const OBSERVER_ROOT_MARGIN = '0px 0px -12% 0px';       // trigger slightly before element fully visible
+const OBSERVER_THRESHOLD = 0.12;                       // fraction of element visible to consider it "in view"
 
-let fadeElements = [];  // Will store all elements to animate
-let windowHeight = 0;   // Viewport height (calculated on load)
+/* Fallback scroll throttle timing (ms) — only used by the scroll fallback */
+const SCROLL_THROTTLE_MS = 100;
 
-// ============================================
-// HELPER FUNCTION: Check if element is in viewport
-// ============================================
+/* ------------------------------
+   Utility: detect reduced motion preference
+   ------------------------------ */
+const prefersReducedMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/**
- * Checks if an element is currently visible in the viewport.
- * 
- * @param {HTMLElement} element - The element to check
- * @returns {boolean} - True if element is in viewport, false otherwise
- */
-function isElementInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    
-    /**
-     * Element is considered "in viewport" if: 
-     * - Its top edge is less than 80% down the screen (starts animating before fully visible)
-     * - Its bottom edge is above the top of the screen (not scrolled past)
-     * 
-     * The 0.8 multiplier means:  trigger when element is 80% of the way down the screen. 
-     * Adjust this value to change when animations start: 
-     * - 1.0 = element must be fully in viewport
-     * - 0.8 = element starts animating when 20% from bottom (recommended)
-     * - 0.5 = element starts animating halfway down screen (very early)
-     */
-    return (
-        rect.top <= windowHeight * 0.8 &&  // Top of element is within trigger zone
-        rect.bottom >= 0                   // Bottom of element hasn't scrolled past top
-    );
+if (prefersReducedMotion) {
+    // If user prefers reduced motion, we will still add the is-visible class
+    // immediately (CSS should handle skipping transitions). This avoids waiting.
+    console.log('ℹ️ User prefers reduced motion — fade-in elements will be revealed without animation.');
 }
 
-// ============================================
-// MAIN FUNCTION: Show visible elements
-// ============================================
+/* ------------------------------
+   CSS expectation (for reference)
+   ------------------------------
+   Make sure your CSS includes something like:
+
+   .fade-in-section { opacity: 0; transform: translateY(8px); transition: opacity .45s ease, transform .45s ease; }
+   .fade-in-section.is-visible { opacity: 1; transform: none; }
+*/
+
+/* ------------------------------
+   Main logic
+   ------------------------------ */
 
 /**
- * Loops through all fade-in elements and shows the ones in viewport.
- * This function is called: 
- * - Once when page loads
- * - Every time user scrolls
+ * Mark an element visible and perform cleanup (remove observer/unobserve).
+ * Ensures we don't re-check elements unnecessarily.
  */
-function showVisibleElements() {
-    
-    // DEBUG: Log that function is running
-    console.log('🔍 Checking for visible elements...');
-    
-    /**
-     * Loop through fadeElements array BACKWARDS. 
-     * Why backwards? So we can safely remove elements from the array
-     * while looping (removing from end doesn't affect earlier indexes).
-     */
-    for (let i = fadeElements.length - 1; i >= 0; i--) {
-        const element = fadeElements[i];
-        
-        // Check if this element is now in the viewport
-        if (isElementInViewport(element)) {
-            
-            // DEBUG: Log which element is being shown
-            console. log('✨ Showing:', element.tagName, element.className);
-            
-            // Add the 'is-visible' class → triggers CSS transition
-            element.classList.add('is-visible');
-            
-            /**
-             * Remove this element from the array. 
-             * Once an element is visible, we don't need to check it anymore.
-             * This improves performance (fewer elements to check on each scroll).
-             */
-            fadeElements.splice(i, 1);
+function revealElement(el, observerInstance) {
+    el.classList.add('is-visible');
+
+    // If using an IntersectionObserver, unobserve this element
+    if (observerInstance && typeof observerInstance.unobserve === 'function') {
+        observerInstance.unobserve(el);
+    }
+}
+
+/* ================================
+   IntersectionObserver Implementation
+   ================================ */
+function initWithIntersectionObserver() {
+
+    // Create the observer with configured options
+    const options = {
+        root: OBSERVER_ROOT,
+        rootMargin: OBSERVER_ROOT_MARGIN,
+        threshold: OBSERVER_THRESHOLD
+    };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            // entry.isIntersecting is true when the intersection conditions are met
+            if (entry.isIntersecting) {
+                revealElement(entry.target, obs);
+            }
+        });
+    }, options);
+
+    // Observe current fade-in elements
+    const els = Array.from(document.querySelectorAll('.fade-in-section:not(.is-visible)'));
+    els.forEach(el => {
+        // If user prefers reduced motion, reveal immediately (no animation)
+        if (prefersReducedMotion) {
+            revealElement(el, null);
+        } else {
+            observer.observe(el);
+        }
+    });
+
+    // Edge-case safety: if new fade-in elements are added dynamically later,
+    // you may want to call observeNewFadeElements() (helper below) to attach them.
+    // Return the observer so tests / cleanup can use it.
+    return observer;
+}
+
+/**
+ * Helper for dynamically added elements: observe any new .fade-in-section elements
+ * that are not yet visible.
+ */
+function observeNewFadeElements(observerInstance) {
+    if (!observerInstance) return;
+    const newEls = Array.from(document.querySelectorAll('.fade-in-section:not(.is-visible)'));
+    newEls.forEach(el => observerInstance.observe(el));
+}
+
+/* ================================
+   Scroll-based Fallback (for old browsers)
+   ================================ */
+
+/**
+ * This fallback mirrors the robust version we discussed previously:
+ * - Maintains a dynamic list of pending elements (not yet .is-visible)
+ * - Performs checks on throttled scroll + on resize/load/image-load
+ * - Slightly relaxed trigger so elements show a bit earlier
+ *
+ * It's kept as a fallback so the website still works on older user agents.
+ */
+function initWithScrollFallback() {
+
+    let pending = [];           // elements still waiting to be revealed
+    let windowHeight = window.innerHeight;
+    let scheduled = false;
+
+    function refreshPending() {
+        pending = Array.from(document.querySelectorAll('.fade-in-section:not(.is-visible)'));
+    }
+
+    function isInView(el) {
+        const rect = el.getBoundingClientRect();
+        // Trigger when element's top reaches 85% of viewport height (similar to observer rootMargin)
+        const triggerMultiplier = 0.85;
+        return (rect.top <= windowHeight * triggerMultiplier && rect.bottom >= 0);
+    }
+
+    function checkAndReveal() {
+        if (pending.length === 0) return;
+
+        for (let i = pending.length - 1; i >= 0; i--) {
+            const el = pending[i];
+            if (el.classList.contains('is-visible')) {
+                pending.splice(i, 1);
+                continue;
+            }
+            if (isInView(el)) {
+                revealElement(el, null);
+                pending.splice(i, 1);
+            }
         }
     }
-    
-    // DEBUG: Log how many elements are still waiting to be shown
-    console.log(`📊 ${fadeElements.length} elements still waiting to fade in`);
-    
-    /**
-     * PERFORMANCE OPTIMIZATION: 
-     * If all elements have been shown, remove the scroll listener.
-     * No point listening to scroll events if there's nothing left to animate.
-     */
-    if (fadeElements.length === 0) {
-        console.log('✅ All elements visible - removing scroll listener');
-        window.removeEventListener('scroll', handleScroll);
+
+    function onScrollThrottled() {
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(() => {
+            refreshPending();   // rebuild pending list (keeps it fresh)
+            checkAndReveal();
+            setTimeout(() => scheduled = false, SCROLL_THROTTLE_MS);
+        });
     }
-}
 
-// ============================================
-// SCROLL HANDLER (with throttling)
-// ============================================
+    // Init
+    refreshPending();
+    if (prefersReducedMotion) {
+        // Reveal everything immediately if reduced-motion is set
+        pending.forEach(el => revealElement(el, null));
+        pending = [];
+        return null;
+    }
 
-/**
- * Variables for throttling scroll events. 
- * Without throttling, showVisibleElements() would run 100+ times per second
- * while scrolling (huge performance hit).
- */
-let isScrolling = false;  // Flag to track if we're currently processing a scroll
+    // Initial check (in case some are already visible)
+    checkAndReveal();
 
-/**
- * Throttled scroll handler. 
- * This ensures showVisibleElements() only runs once every 100ms,
- * even if the user scrolls continuously.
- */
-function handleScroll() {
-    
-    // If we're already processing a scroll event, ignore this one
-    if (isScrolling) return;
-    
-    // Set the flag to prevent multiple simultaneous calls
-    isScrolling = true;
-    
-    /**
-     * Use requestAnimationFrame for smooth performance.
-     * This tells the browser to run our function at the optimal time
-     * (synced with screen refresh rate, usually 60fps).
-     */
-    requestAnimationFrame(() => {
-        showVisibleElements();
-        
-        /**
-         * After 100ms, reset the flag so the next scroll can be processed.
-         * This throttles the function to run at most 10 times per second.
-         */
+    // Add listeners if there are still pending items
+    if (pending.length > 0) {
+        window.addEventListener('scroll', onScrollThrottled, { passive: true });
+        window.addEventListener('resize', function () {
+            windowHeight = window.innerHeight;
+            refreshPending();
+            checkAndReveal();
+        });
+
+        // Recheck after a short timeout (to catch late layout shifts)
         setTimeout(() => {
-            isScrolling = false;
-        }, 100);
-    });
+            windowHeight = window.innerHeight;
+            refreshPending();
+            checkAndReveal();
+        }, 140);
+
+        // Recheck on window load (images/fonts finished)
+        window.addEventListener('load', function () {
+            windowHeight = window.innerHeight;
+            refreshPending();
+            checkAndReveal();
+        });
+
+        // Recheck after images load (useful for layout shifts)
+        const imgs = Array.from(document.images || []);
+        imgs.forEach(img => {
+            if (!img.complete) {
+                img.addEventListener('load', function () {
+                    windowHeight = window.innerHeight;
+                    refreshPending();
+                    checkAndReveal();
+                }, { once: true });
+            }
+        });
+    }
+
+    // Return a small API object so tests / future cleanup may remove listeners if desired.
+    return {
+        stop: function () {
+            window.removeEventListener('scroll', onScrollThrottled);
+        }
+    };
 }
 
-// ============================================
-// INITIALIZATION
-// ============================================
-
-/**
- * Wait for DOM to fully load before running our code.
- * This ensures all HTML elements exist before we try to select them.
- */
-document. addEventListener('DOMContentLoaded', function() {
-    
-    // DEBUG:  Confirm script has loaded
-    console.log('🎬 Fade-in animation script loaded');
-    
-    // ========================================
-    // 1. SELECT ALL ELEMENTS TO ANIMATE
-    // ========================================
-    
-    /**
-     * Find all elements with the 'fade-in-section' class.
-     * Convert NodeList to Array so we can use array methods (like splice).
-     */
-    fadeElements = Array.from(document. querySelectorAll('.fade-in-section'));
-    
-    // DEBUG: Log how many elements were found
-    console.log(`🎯 Found ${fadeElements. length} elements to animate`);
-    
-    // If no elements found, show warning and exit
-    if (fadeElements.length === 0) {
-        console.warn('⚠️ No elements with class "fade-in-section" found.');
+/* ================================
+   Bootstrap on DOM ready
+   ================================ */
+document.addEventListener('DOMContentLoaded', function () {
+    // If user prefers reduced motion, reveal all items immediately and skip observers
+    if (prefersReducedMotion) {
+        const all = Array.from(document.querySelectorAll('.fade-in-section:not(.is-visible)'));
+        all.forEach(el => revealElement(el, null));
         return;
     }
-    
-    // ========================================
-    // 2. GET VIEWPORT HEIGHT
-    // ========================================
-    
-    /**
-     * Store the viewport height for calculations.
-     * We do this once instead of recalculating on every scroll (performance).
-     */
-    windowHeight = window.innerHeight;
-    console.log(`📏 Viewport height: ${windowHeight}px`);
-    
-    // ========================================
-    // 3. CHECK INITIAL VISIBILITY
-    // ========================================
-    
-    /**
-     * Check which elements are already visible when page loads.
-     * This handles the case where user refreshes in the middle of the page.
-     */
-    console.log('🔎 Checking initial visibility...');
-    showVisibleElements();
-    
-    // ========================================
-    // 4. ADD SCROLL LISTENER
-    // ========================================
-    
-    /**
-     * Listen for scroll events (only if there are still elements to show).
-     * We use our throttled handler to avoid performance issues.
-     */
-    if (fadeElements.length > 0) {
-        console.log('👂 Adding scroll listener');
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        
-        /**
-         * The { passive: true } option tells the browser: 
-         * "This scroll handler won't call preventDefault(), so you can
-         * optimize scrolling performance."
-         */
+
+    // Use IntersectionObserver when available (modern, precise)
+    if ('IntersectionObserver' in window) {
+        console.log('⚡ Using IntersectionObserver for fade-in animations');
+        const observer = initWithIntersectionObserver();
+
+        // Optional: if your app injects content dynamically (AJAX, frameworks),
+        // you can call observeNewFadeElements(observer) to attach them later.
+
+    } else {
+        // Fallback path for older browsers
+        console.log('⚠️ IntersectionObserver not available — using scroll fallback');
+        initWithScrollFallback();
     }
-    
-    // ========================================
-    // 5. HANDLE WINDOW RESIZE
-    // ========================================
-    
-    /**
-     * If user resizes the window, update the stored viewport height.
-     * This ensures calculations stay accurate on mobile (orientation change)
-     * or desktop (window resize).
-     */
-    window.addEventListener('resize', function() {
-        windowHeight = window.innerHeight;
-        console.log(`📐 Viewport resized to:  ${windowHeight}px`);
-        
-        // Recheck visibility after resize (elements might now be in view)
-        showVisibleElements();
-    });
-    
-    console.log('✅ Animation system initialized');
 });
-
-
-// ============================================
-// ACCESSIBILITY:  Respect reduced motion preference
-// ============================================
-
-/**
- * Check if user has "reduce motion" enabled in their OS settings.
- * If so, log a message (the CSS already handles skipping animations).
- */
-if (window.matchMedia('(prefers-reduced-motion:  reduce)').matches) {
-    console.log('ℹ️ User prefers reduced motion - animations will be instant (handled by CSS)');
-}
