@@ -3,7 +3,6 @@
 {% block title %}Projects - Arash Mirshahi{% endblock %}
 
 {% block content %}
-<!-- Added 'hero-compact' class instead of inline style -->
 <section class="hero hero-compact">
     <div class="hero-text">
         <h1>My Projects</h1>
@@ -13,64 +12,116 @@
     </div>
 </section>
 
-<!-- 
-    Removed the extra <div class="content-container"> wrapper here.
-    base.html already provides it, so we just start the grid directly.
--->
 <div class="projects-grid">
 
-    <!-- PROJECT 1: Stock Portfolio Dashboard -->
+    <!-- PROJECT 1: Stock Portfolio Dashboard (GitHub) -->
     <div class="project-card">
-        <h3 class="project-title">Stock Portfolio Dashboard</h3>
-        <p class="project-desc">
-            A comprehensive full-stack web application built with <strong>Flask</strong> and <strong>Plotly</strong> to track and visualize investment portfolios. 
-            Features real-time data updates, interactive charts, and performance metrics.
-        </p>
-        <!-- Used new classes: tech-stack-left, tech-badge-small -->
-        <div class="tech-stack tech-stack-left">
-            <span class="tech-badge tech-badge-small">Python</span>
-            <span class="tech-badge tech-badge-small">Flask</span>
-            <span class="tech-badge tech-badge-small">Plotly</span>
-            <span class="tech-badge tech-badge-small">CSS</span>
+        <div class="card-header">
+            <h3 class="project-title">Stock Portfolio Dashboard</h3>
+            <div class="tech-stack tech-stack-left">
+                <span class="tech-badge tech-badge-small">Python</span>
+                <span class="tech-badge tech-badge-small">Flask</span>
+                <span class="tech-badge tech-badge-small">APIs</span>
+                <span class="tech-badge tech-badge-small">HTML/CSS</span>
+            </div>
         </div>
-        <a href="https://github.com/Arashi20/Stock_Portfolio_Dashboard" target="_blank" class="btn-link">
-            View Code <i class="fab fa-github"></i>
-        </a>
+
+        <div class="card-content">
+            <p class="project-desc">
+                A comprehensive full-stack web application built with <strong>Flask</strong> and <strong>HTML</strong>
+                to track my stock portfolio. Features real-time data updates, Discounted Cash Flow (DCF) analysis, a wishlist
+                for potential investments, a page for adding notes on stocks, and performance metrics.
+            </p>
+        </div>
+
+        <div class="card-footer">
+            <a href="https://github.com/Arashi20/Stock_Portfolio_Dashboard" target="_blank" rel="noopener" class="btn-link">
+                VIEW CODE <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
+        </div>
     </div>
 
-    <!-- PROJECT 2: Stock Research MAS (Multi-Agent System) -->
+    <!-- PROJECT 2: AI Stock Research Agent (GitHub) -->
     <div class="project-card">
-        <h3 class="project-title">AI Stock Research Agent</h3>
-        <p class="project-desc">
-            An autonomous <strong>Multi-Agent System (MAS)</strong> designed to research financial markets. 
-            Agents collaborate to scrape news, analyze sentiment, and generate investment reports automatically.
-        </p>
-        <div class="tech-stack tech-stack-left">
-            <span class="tech-badge tech-badge-small">LangChain</span>
-            <span class="tech-badge tech-badge-small">LLMs</span>
-            <span class="tech-badge tech-badge-small">Python</span>
-            <span class="tech-badge tech-badge-small">Agents</span>
+        <div class="card-header">
+            <h3 class="project-title">AI Stock Research Agent</h3>
+            <div class="tech-stack tech-stack-left">
+                <span class="tech-badge tech-badge-small">LangChain</span>
+                <span class="tech-badge tech-badge-small">LLMs</span>
+                <span class="tech-badge tech-badge-small">Agents</span>
+                <span class="tech-badge tech-badge-small">Streamlit</span>
+                <span class="tech-badge tech-badge-small">Python</span>
+            </div>
         </div>
-        <a href="https://github.com/Arashi20/stock-research-MAS" target="_blank" class="btn-link">
-            View Code <i class="fab fa-github"></i>
-        </a>
+
+        <div class="card-content">
+            <p class="project-desc">
+                An autonomous Multi-Agent System to research financial markets. Agents scrape news, analyze sentiment, check technical indicators,
+                and compile reports. The project contains orchestration patterns and a test harness for agent interactions. After filling in a ticker symbol
+                the systems automatically generates a comprehensive stock research report.
+
+            </p>
+        </div>
+
+        <div class="card-footer">
+            <a href="https://github.com/Arashi20/stock-research-MAS" target="_blank" rel="noopener" class="btn-link">
+                VIEW CODE <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
+        </div>
     </div>
 
-    <!-- PROJECT 3: Portfolio Website (Meta!) -->
+    <!-- PROJECT 3: Personal Portfolio (GitHub) -->
     <div class="project-card">
-        <h3 class="project-title">Personal Portfolio</h3>
-        <p class="project-desc">
-            The website you are looking at right now! Designed from scratch to serve as a minimalist, high-performance extension of my CV. 
-            Built with a focus on clean design and responsiveness.
-        </p>
-        <div class="tech-stack tech-stack-left">
-            <span class="tech-badge tech-badge-small">Flask</span>
-            <span class="tech-badge tech-badge-small">HTML/CSS</span>
-            <span class="tech-badge tech-badge-small">Design</span>
+        <div class="card-header">
+            <h3 class="project-title">Personal Portfolio Website</h3>
+            <div class="tech-stack tech-stack-left">
+                <span class="tech-badge tech-badge-small">Flask</span>
+                <span class="tech-badge tech-badge-small">HTML/CSS</span>
+                <span class="tech-badge tech-badge-small">Design</span>
+            </div>
         </div>
-        <a href="https://github.com/Arashi20/Personal_Portfolio_Website" target="_blank" class="btn-link">
-            View Code <i class="fab fa-github"></i>
-        </a>
+
+        <div class="card-content">
+            <p class="project-desc">
+                The website you are looking at now — minimalist, high-performance and responsive.
+                Pages: Home, Projects, CV, and Blog. I built this website from scratch because I wanted full control
+                over the design and functionality. It's built with Flask for easy content management and deployment.
+            </p>
+        </div>
+
+        <div class="card-footer">
+            <a href="https://github.com/Arashi20/Personal_Portfolio_Website" target="_blank" rel="noopener" class="btn-link">
+                VIEW CODE <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- PROJECT 4: Bachelor Thesis (dedicated page) -->
+    <div class="project-card">
+        <div class="card-header">
+            <h3 class="project-title">Bachelor Thesis: Awe & The Overview Effect</h3>
+            <div class="tech-stack tech-stack-left">
+                <span class="tech-badge tech-badge-small">Research</span>
+                <span class="tech-badge tech-badge-small">Awe</span>
+                <span class="tech-badge tech-badge-small">Psychology</span>
+                <span class="tech-badge tech-badge-small">Data Analysis</span>
+                <span class="tech-badge tech-badge-small">Virtual Reality</span>
+                <span class="tech-badge tech-badge-small">Python/R</span>
+            </div>
+        </div>
+
+        <div class="card-content">
+            <p class="project-desc">
+                A detailed investigation into awe and the Overview Effect. The dedicated project page contains the
+                embedded thesis PDF extra details.
+            </p>
+        </div>
+
+        <div class="card-footer">
+            <a href="{{ url_for('project_detail', slug='bachelor-thesis-awe') }}" class="btn-link">
+                OPEN PROJECT <i class="fa fa-external-link-alt" aria-hidden="true"></i>
+            </a>
+        </div>
     </div>
 
 </div>

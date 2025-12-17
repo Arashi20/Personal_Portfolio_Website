@@ -298,6 +298,59 @@ a {
     color: var(--accent-color);
     text-transform: uppercase;
     letter-spacing: 1px;
+    
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column; /* stack header, content, footer vertically */
+    align-items: stretch;   /* make children fill width */
+
+    /* If you keep a fixed height for visual consistency, keep it here.
+       If you prefer cards to size naturally, remove/override this. */
+    /* height: var(--project-card-height); */
+
+    /* keep padding & box-sizing as before */
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+/* card-content takes the available space between header and footer */
+.card-content {
+    flex: 1 1 auto; /* grow/shrink; crucial so footer sits at bottom */
+    display: block; /* keep standard flow for text inside */
+    overflow: visible; /* descriptions should flow naturally */
+    margin-bottom: 0.5rem; /* small spacing before footer; tweak as needed */
+}
+
+/* Push footer to the bottom of the card */
+.card-footer {
+    margin-top: auto;       /* magic: pushes footer down */
+    display: flex;
+    gap: 12px;              /* space between buttons/links */
+    align-items: center;    /* vertically center items inside footer */
+    justify-content: flex-start; /* left align links/buttons */
+    padding-top: 8px;       /* optional breathing room */
+}
+
+/* Make sure link-style buttons in footer are left aligned and consistent */
+.card-footer .btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Small screen tweak: if you previously forced card height on desktop,
+   allow cards to size naturally on mobile but still keep footer at bottom. */
+@media (max-width: 768px) {
+    .project-card {
+        /* if you had a fixed height, remove it on mobile (recommended) */
+        height: auto !important;
+    }
+    .card-content {
+        /* allow more breathing room on mobile */
+        margin-bottom: 0.75rem;
+    }
 }
 
 /* =========================================

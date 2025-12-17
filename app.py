@@ -1,6 +1,6 @@
 # Backend code for Personal Portfolio Website
 
-from flask import Flask, render_template
+from flask import Flask, render_template, abort, url_for
 import markdown
 import os
 
@@ -8,6 +8,21 @@ app = Flask(__name__)
 
 
 POSTS_DIR = 'posts' # Directory where markdown blog posts are stored
+
+# Simple in-memory metadata. For many projects, read from JSON/YAML/db.
+PROJECTS = {
+    "bachelor-thesis-awe": {
+        "title": "Bachelor Thesis: Topic XYZ",
+        "slug": "bachelor-thesis-awe",
+        "subtitle": "A concise subtitle describing the thesis",
+        "description": "Full description text for the thesis page. Include background, key findings, and what the reader can expect in the PDF.",
+        "file": "docs/Bachelor_Thesis_Awe.pdf",  # file inside static/docs/
+    
+        
+    },
+    # add other dedicated project pages similarly
+}
+
 
 # Home Route
 @app.route('/')
@@ -26,6 +41,17 @@ def projects():
     Renders the Portfolio/Projects page.
     """
     return render_template('projects.html')
+
+
+@app.route('/projects/<slug>')
+def project_detail(slug):
+    project = PROJECTS.get(slug)
+    if not project:
+        abort(404)
+    # project.file is a path relative to static/
+    # url_for will be used in template to get correct static URL
+    return render_template('project_detail.html', project=project)
+
 
 # CV Route
 @app.route('/cv')
