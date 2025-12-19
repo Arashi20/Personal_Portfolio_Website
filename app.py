@@ -12,10 +12,18 @@ POSTS_DIR = 'posts' # Directory where markdown blog posts are stored
 # Simple in-memory metadata. For many projects, read from JSON/YAML/db.
 PROJECTS = {
     "bachelor-thesis-awe": {
-        "title": "Bachelor Thesis: Topic XYZ",
+        "title": "Awe & The Overview Effect",
+        "title_short": "Bachelor Thesis: A VR Study",
         "slug": "bachelor-thesis-awe",
-        "subtitle": "A concise subtitle describing the thesis",
-        "description": "Full description text for the thesis page. Include background, key findings, and what the reader can expect in the PDF.",
+        "subtitle": """How effectively can awe and the Overview Effect be elicited
+                    in a Cave Automatic Virtual Environment (CAVE) and what
+                    are the resulting impacts of such experiences on one’s
+                    self-size perception?""",
+        "description_html": """
+            <p>This thesis studies the psychological phenomenon of awe and the Overview Effect.
+               It contains chapters on theory, experimental design and results.</p>
+            
+        """,
         "file": "docs/Bachelor_Thesis_Awe.pdf",  # file inside static/docs/
     
         

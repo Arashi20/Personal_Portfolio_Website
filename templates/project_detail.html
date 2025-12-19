@@ -14,10 +14,10 @@
 
 <div class="content-container">
   <div class="cv-container"> <!-- reuse your card/paper styling for focus -->
-    <h2>{{ project.title }}</h2>
+    <h2>{{ project.title_short }}</h2>
 
     <div class="bio-section">
-      <p>{{ project.description }}</p>
+      {{ project.description_html|safe }}
     </div>
 
     {% if project.file %}
