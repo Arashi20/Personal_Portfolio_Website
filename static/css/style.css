@@ -250,6 +250,18 @@ a {
     margin-bottom: 1em;
 }
 
+/* style.css: Fix bullet (unordered/ordered list) indentation for blog content */
+.blog-content ul,
+.blog-content ol {
+    margin-left: 1.5em;    /* for spacing from left */
+    padding-left: 1.5em;   /* ensures the bullets/icons have room */
+    list-style-position: outside;
+}
+
+.blog-content li {
+    margin-bottom: 0.5em;  /* optional: extra space between bullet points */
+}
+
 
 /* =========================================
    5. Projects Section (Grid Layout)
@@ -1269,6 +1281,8 @@ a {
     justify-content: center;
     gap: 15px;
     margin-bottom:  40px;
+    overflow: visible !important;  /* ensures borders can overflow naturally */
+    height: auto !important;       /* allow buttons to define container height */
 }
 
 /**
@@ -1285,14 +1299,12 @@ a {
     font-weight: 700;
     text-decoration: none;
     color: #2D3748;
-    background: #FFFFFF;
-    border: 2px solid #E2E8F0;
-    border-radius: 8px;
+    /**background: #FFFFFF; */
+    /**border: 2px solid #E2E8F0; */
+    border-radius: 8px; 
     transition: all 0.3s ease;
     user-select: none;
 
-    /* Ensure consistent border visibility */
-    border-bottom: 2px solid transparent;
 }
 
 .error-btn:hover {
@@ -1301,8 +1313,7 @@ a {
     border-color: var(--accent-color);
     color: var(--accent-color);
 
-    /* Make the bottom border visible on hover */
-    border-bottom: 2px solid var(--accent-color);
+    
 }
 
 
@@ -1435,7 +1446,7 @@ a {
         align-items: stretch;  /* Full-width buttons on mobile */
     }
     
-    . error-btn {
+    .error-btn {
         width:  100%;           /* Full-width buttons */
         justify-content: center;
     }
@@ -1452,7 +1463,7 @@ a {
  * Further adjustments for tiny phones
  */
 @media (max-width: 400px) {
-    . error-code h1 {
+    .error-code h1 {
         font-size: 4.5rem;     /* Even smaller for tiny screens */
     }
     
