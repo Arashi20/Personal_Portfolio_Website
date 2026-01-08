@@ -1,11 +1,27 @@
 # Backend code for Personal Portfolio Website
 
 from flask import Flask, render_template, abort, url_for, request 
+from flask_talisman import Talisman
+from werkzeug.middleware.proxy_fix import ProxyFix
 import markdown
 import os
 import re
 
 app = Flask(__name__)
+
+# ---------------------------------------------------------
+# SECURITY CONFIGURATION (Railway/Production)
+# 1. ProxyFix: Tells Flask it is behind a proxy (Railway)
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+)
+
+# 2. Talisman: Forces HTTPS and sets security headers.
+#    content_security_policy=None allows inline scripts/styles 
+#    (which you use for Google Analytics and animations).
+Talisman(app, content_security_policy=None, force_https=True)
+# ---------------------------------------------------------
+
 
 
 POSTS_DIR = 'posts' # Directory where markdown blog posts are stored
