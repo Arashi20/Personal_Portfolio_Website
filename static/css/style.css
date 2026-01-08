@@ -352,6 +352,42 @@ a {
     gap: 8px;
 }
 
+/* Project Search Bar Styling */
+.project-search-bar {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.search-input {
+    border: 2px solid #c7e0fc;
+    border-radius: 8px;
+    padding: 12px 16px;
+    width: 100%;
+    max-width: 460px;
+    font-size: 1.05rem;
+    background: #fafdff;
+    color: #2D3748;
+    transition: border 0.18s, box-shadow 0.18s;
+}
+.search-input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.10);
+}
+
+/* accessibility: visually hidden label */
+.visually-hidden {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
+}
+
 /* Small screen tweak: if you previously forced card height on desktop,
    allow cards to size naturally on mobile but still keep footer at bottom. */
 @media (max-width: 768px) {

@@ -1,15 +1,16 @@
 # Backend code for Personal Portfolio Website
 
-from flask import Flask, render_template, abort, url_for
+from flask import Flask, render_template, abort, url_for, request 
 import markdown
 import os
+import re
 
 app = Flask(__name__)
 
 
 POSTS_DIR = 'posts' # Directory where markdown blog posts are stored
 
-# Simple in-memory metadata. For many projects, read from JSON/YAML/db.
+# Project-specific detailed metadata
 PROJECTS = {
     "bachelor-thesis-awe": {
         "title": "Awe & The Overview Effect",
@@ -32,6 +33,110 @@ PROJECTS = {
 }
 
 
+# All Projects
+PROJECTS_LIST = [
+    {
+        "title": "Stock Portfolio Dashboard",
+        "badges": ["Python", "Flask", "APIs", "HTML/CSS"],
+        "desc": "A comprehensive full-stack web application built with Flask and HTML to track my stock portfolio. Features real-time data updates, Discounted Cash Flow (DCF) analysis, a wishlist for potential investments, a page for adding notes on stocks, and performance metrics.",
+        "url": "https://github.com/Arashi20/Stock_Portfolio_Dashboard",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+    },
+    {
+        "title": "AI Stock Research Agent",
+        "badges": ["LangChain", "LLMs", "Agents", "Streamlit", "Python"],
+        "desc": "An autonomous Multi-Agent System to research financial markets. Agents scrape news, analyze sentiment, check technical indicators, and compile reports. The system automatically generates a comprehensive stock research report for any ticker symbol entered.",
+        "url": "https://github.com/Arashi20/stock-research-MAS",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+    },
+    {
+        "title": "Personal Portfolio Website",
+        "badges": ["Flask", "HTML/CSS", "Design"],
+        "desc": "The website you are looking at now — minimalist, high-performance and responsive. Pages: Home, Projects, CV, and Blog. I built this website from scratch because I wanted full control over the design and functionality. It's built with Flask for easy content management and deployment.",
+        "url": "https://github.com/Arashi20/Personal_Portfolio_Website",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+    },
+    {
+        "title": "Bachelor Thesis: Awe & The Overview Effect",
+        "badges": ["Research", "Awe", "Psychology", "Data Analysis", "Virtual Reality", "Python/R"],
+        "desc": "For my Bachelor Thesis, I conducted a detailed investigation into awe and the Overview Effect, using the CAVE VR system at the DAF Technology lab. My research focused on how virtual reality experiences can induce feelings of awe and the Overview Effect.",
+        "url": "/projects/bachelor-thesis-awe",
+        "button": "OPEN PROJECT",
+        "icon": "fa fa-external-link-alt",
+        "external": False  # Internal Flask route, not an external link!
+    },
+    {
+        "title": "EEG Exploration & Probabilistic Modeling",
+        "badges": ["Python", "MNE", "Data Analysis", "PyMC", "Matplotlib/Seaborn"],
+        "desc": "A project focused on exploring and analyzing EEG data using the MNE library in Python. Includes data preprocessing, visualization of brain activity, and extraction of meaningful insights from EEG signals.",
+        "url": "https://github.com/Arashi20/EEG-Exploration",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+    },
+    {
+        "title": "OWASP Juice Shop - ZAP Scan",
+        "badges": ["Docker", "OWASP ZAP", "Security Testing", "Reporting"],
+        "desc": "A small hands-on project to run OWASP Juice Shop (an intentionally vulnerable web app) and OWASP ZAP (free proxy/scanner) to learn basic web security concepts.",
+        "url": "https://github.com/Arashi20/OWASP_Juice_Shop_ZAP_Training",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+    },
+    {
+        "title": "S&P 500 Prediction Model",
+        "badges": ["Machine Learning", "LSTM", "LightGBM", "Market Analysis", "Python"],
+        "desc": "This project aimed to explore historical S&P 500 data and build machine learning models (An LSTM model and a LightGBM model) to identify patterns related to bull markets, bear markets, and crashes, investigating potential predictability in market movements.",
+        "url": "https://github.com/Arashi20/sp500_Prediction",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+    },
+    {
+        "title": "Valence Prediction from Raw Speech",
+        "badges": ["LSTM", "Speech Processing", "Python", "Deep Learning"],
+        "desc": "A deep learning project focused on predicting valence (emotional positivity or negativity) from raw speech data using a bidirectional LSTM model. The project involves preprocessing audio data, feature extraction, model training, and evaluation.",
+        "url": "https://github.com/Arashi20/ValencePredictor_DL",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+    },
+    {
+        "title": "Robot Benchmark - BB8 Pit Escape",
+        "badges": ["Python", "Robot Simulation", "Autonomous Systems"],
+        "desc": "A Tilburg University project for the course 'Autonomous Systems', involving the improvement of an autonomous robot agent designed to escape from a pit obstacle in a simulated environment (BB8 robot). The focus is on robot navigation, obstacle avoidance, and autonomous decision-making using Python.",
+        "url": "https://github.com/Arashi20/RobotBenchmark-BB8",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+    },
+    {
+        "title": "Australian Biodiversity Analysis",
+        "badges": ["Geopandas", "Deep Learning", "Data Visualization", "Python", "Keras"],
+        "desc": "A Tilburg University project for the course 'AI For Nature & Environment'. Main goal: Construct a predictive neural network model designed to analyze random occurrences spanning diverse locations in Australia.",
+        "url": "https://github.com/Arashi20/AustralianBiodiversity_DL",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+    },
+    {
+        "title": "Heart Attack Classification Model",
+        "badges": ["Machine Learning", "Data Analysis", "Python", "Scikit-Learn", "Logistic Regression"],
+        "desc": "A small-scale project using various machine learning techniques. The project involves developing a classification model to predict the likelihood of heart attacks based on various health parameters.",
+        "url": "https://github.com/Arashi20/Heart-Diseases-Classification",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+    }
+]
+
+
 # Home Route
 @app.route('/')
 def home():
@@ -47,8 +152,21 @@ def home():
 def projects():
     """
     Renders the Portfolio/Projects page.
+    Optionally filters projects by search query (?q=...).
     """
-    return render_template('projects.html')
+    query = request.args.get('q', '').strip().lower()
+
+    # Filtering logic (similar to blog index)
+    def matches(proj):
+        text = proj['title'] + ' ' + ' '.join(proj['badges']) + ' ' + proj['desc']
+        return query in text.lower()
+
+    projects_to_show = [p for p in PROJECTS_LIST if matches(p)] if query else PROJECTS_LIST
+
+    #Test
+    print("SEARCH QUERY:", query, "| Projects Shown:", len(projects_to_show))
+
+    return render_template('projects.html', projects=projects_to_show, search_query=query)
 
 
 @app.route('/projects/<slug>')
@@ -78,6 +196,7 @@ def blog():
     Expects files named like: YYYY-MM-DD_post_title.md
     Example: 2025-12-09_welcome.md
     """
+    query = request.args.get('q', '').strip().lower()
     posts = []
     
     if os.path.exists(POSTS_DIR):
@@ -112,8 +231,19 @@ def blog():
     
     # Sort by filename in REVERSE order (Newest dates first)
     posts.sort(key=lambda x: x['filename'], reverse=True)
+
+    # Search/filter functionality
+    if query:
+        def matches(post):
+            # You can also add more fields if desired (e.g., content preview if available)
+            searchspace = f"{post['title']} {post['date']}"
+            return query in searchspace.lower()
+        filtered_posts = [p for p in posts if matches(p)]
+    else:
+        filtered_posts = posts
+
+    return render_template('blog.html', posts=filtered_posts, search_query=query)
     
-    return render_template('blog.html', posts=posts)
 
 # Individual Blog Post Route
 @app.route('/blog/<title>')
@@ -149,4 +279,4 @@ def page_not_found(error):
 
 
 if __name__ == "__main__":
-    app.run(debug=False)  # Set debug=True for development only
+    app.run(debug=True)  # Set debug=True for development only
