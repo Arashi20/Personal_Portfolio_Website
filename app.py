@@ -149,6 +149,15 @@ PROJECTS_LIST = [
         "button": "VIEW CODE",
         "icon": "fab fa-github",
         "external": True
+    },
+    {
+        "title": "Personal Workout Data Pipeline",
+        "badges": ["Data Analysis", "Python", "Pandas", "Data Engineering", "Data Science"],
+        "desc": "This project implements a complete data science workflow using 2.5 years of personal workout data from StrengthLog. It demonstrates the full pipeline from raw data ingestion through feature engineering to predictive modeling, with emphasis on code quality, modularity, and testing.",
+        "url": "https://github.com/Arashi20/Workout_Data_Pipeline",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
     }
 ]
 
