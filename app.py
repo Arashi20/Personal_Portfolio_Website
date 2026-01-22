@@ -1,5 +1,3 @@
-# Backend code for Personal Portfolio Website
-
 from flask import Flask, render_template, abort, url_for, request 
 from flask_talisman import Talisman
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -12,6 +10,7 @@ app = Flask(__name__)
 # ---------------------------------------------------------
 # SECURITY CONFIGURATION (Railway/Production)
 # 1. ProxyFix: Tells Flask it is behind a proxy (Railway)
+
 app.wsgi_app = ProxyFix(
     app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
 )
@@ -19,6 +18,7 @@ app.wsgi_app = ProxyFix(
 # 2. Talisman: Forces HTTPS and sets security headers.
 #    content_security_policy=None allows inline scripts/styles 
 #    (which you use for Google Analytics and animations).
+
 Talisman(app, content_security_policy=None, force_https=True)
 # ---------------------------------------------------------
 
@@ -31,21 +31,22 @@ PROJECTS = {
     "bachelor-thesis-awe": {
         "title": "Awe & The Overview Effect",
         "title_short": "Bachelor Thesis: A VR Study",
-        "slug": "bachelor-thesis-awe",
+        "slug": "bachelor-thesis-awe", # used in URL
         "subtitle": """How effectively can awe and the Overview Effect be elicited
                     in a Cave Automatic Virtual Environment (CAVE) and what
                     are the resulting impacts of such experiences on one’s
-                    self-size perception?""",
+                    self-size perception?""", 
         "description_html": """
             <p>This thesis studies the psychological phenomenon of awe and the Overview Effect.
                It contains chapters on theory, experimental design and results.</p>
             
-        """,
+        """,                    
         "file": "docs/Bachelor_Thesis_Awe.pdf",  # file inside static/docs/
     
         
     },
-    # add other dedicated project pages similarly
+
+    # add other dedicated project pages similarly..
 }
 
 
@@ -188,9 +189,6 @@ def projects():
 
     projects_to_show = [p for p in PROJECTS_LIST if matches(p)] if query else PROJECTS_LIST
 
-    #Test
-    print("SEARCH QUERY:", query, "| Projects Shown:", len(projects_to_show))
-
     return render_template('projects.html', projects=projects_to_show, search_query=query)
 
 
@@ -325,4 +323,4 @@ def page_not_found(error):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)  # Set debug=True for development only
+    app.run(debug=False)  # Set debug=True for development only

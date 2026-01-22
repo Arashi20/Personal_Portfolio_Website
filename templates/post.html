@@ -9,17 +9,12 @@
     
     <!-- 1. Navigation Back Button -->
     <div style="margin-bottom: 30px;">
-        <!-- Assuming your blog index route is named 'blog' -->
         <a href="{{ url_for('blog') }}" class="btn-link">
             <i class="fas fa-arrow-left"></i> Back to Blog
         </a>
     </div>
 
-    <!-- 
-       2. The Article Content 
-       We wrap this in 'blog-content' because you already added styles for this 
-       class in your css file earlier (lines 199-210 in style.css).
-    -->
+    
     <article class="blog-content">
         <!-- 
            The 'safe' filter is CRITICAL. 
