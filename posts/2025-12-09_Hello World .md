@@ -1,3 +1,4 @@
+<!-- keywords: portfolio, flask, Railway deployment -->
 # Welcome to my Blog!
 
 You are currently witnessing the first blog post on my personal portfolio website! It took me a while to settle on what design I wanted to go for and adding in all the MVP functionalities, but the final product is very much to my liking. 

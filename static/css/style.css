@@ -925,6 +925,7 @@ a {
     padding-bottom: 20px;
 }
 
+
 .cv-header h1 {
     font-size: 2.5rem;
     margin: 0;
@@ -1048,6 +1049,91 @@ a {
     flex: 1; 
 }
 
+/* For larger screens, allow content to breathe */
+@media (min-width: 1400px) {
+    .blog-index-container {
+        max-width: 1200px;
+    }
+}
+
+/* For ultra-wide/4K displays */
+@media (min-width: 1920px) {
+    .blog-index-container {
+        max-width: 1600px;
+    }
+}
+
+/* Optional: Adjust blog header on large screens */
+@media (min-width: 1400px) {
+    .blog-header h1 {
+        font-size: 3.5rem;
+    }
+    
+    .blog-header .subtitle {
+        font-size: 1.3rem;
+    }
+}
+
+/* 👇 ENHANCED: Scale gaps on large screens */
+@media (min-width: 1400px) {
+    .blog-list {
+        gap: 28px;  /* More space between cards */
+    }
+}
+
+/* Make blog cards larger on big screens */
+@media (min-width: 1400px) {
+    .blog-card {
+        padding: 32px;
+    }
+    
+    .blog-card h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* 👇 ENHANCED: Make cards larger on big screens */
+@media (min-width: 1400px) {
+    .blog-card {
+        padding: 40px 50px;  /* More generous padding */
+        border-radius: 10px; /* Slightly rounder corners */
+    }
+    
+    .blog-card h2 {
+        font-size: 2rem;     /* Larger titles */
+        margin-bottom: 15px;
+    }
+    
+    .blog-date {
+        font-size: 1rem;     /* Larger date text */
+    }
+    
+    .keyword-badge {
+        font-size: 0.85rem;  /* Larger keyword badges */
+        padding: 6px 14px;
+    }
+    
+    .read-more {
+        font-size: 1rem;     /* Larger "Read Article" text */
+    }
+}
+
+/* 👇 NEW: Extra scaling for 4K displays */
+@media (min-width: 1920px) {
+    .blog-card {
+        padding: 50px 60px;  /* Even more padding on 4K */
+    }
+    
+    .blog-card h2 {
+        font-size: 2.2rem;   /* Even larger titles */
+    }
+    
+    .blog-keywords {
+        gap: 12px;           /* More space between badges */
+    }
+}
+
+
 .blog-header {
     text-align: center;
     margin-bottom: 50px;
@@ -1105,6 +1191,30 @@ a {
     transition: color 0.3s;
     margin-top: 0;
 }
+
+.blog-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.keyword-badge {
+    background: #EBF5FF;
+    color: #2c5aa0;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: var(--font-header);
+    border: 1px solid #C3DAFE;
+    transition: all 0.2s ease;
+}
+
+.blog-card:hover .keyword-badge {
+    background: #BEE3F8;
+    border-color: var(--accent-color);
+}
+
 
 .blog-date {
     display: block;

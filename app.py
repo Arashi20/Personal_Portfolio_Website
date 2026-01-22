@@ -213,6 +213,22 @@ def cv():
     return render_template('cv.html')
 
 
+# Utility function to extract keywords from markdown file
+def extract_keywords_from_file(filepath):
+    """Extract keywords from the first line of a markdown file."""
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            first_line = f.readline().strip()
+            # Match: <!-- keywords: word1, word2, word3 -->
+            match = re.match(r'<!--\s*keywords:\s*(.+?)\s*-->', first_line, re.IGNORECASE)
+            if match:
+                keywords_str = match.group(1)
+                return [k.strip() for k in keywords_str.split(',')]
+    except Exception:
+        pass
+    return []
+
+
 # Blog Post Route
 @app.route('/blog')
 def blog():
@@ -231,6 +247,10 @@ def blog():
             if file.endswith('.md'):
                 slug = file[:-3]  # Remove .md extension
                 
+                # Extract keywords from file content
+                filepath = os.path.join(POSTS_DIR, file)
+                keywords = extract_keywords_from_file(filepath)
+
                 # Default values
                 date_part = ""
                 title_part = slug
@@ -251,7 +271,9 @@ def blog():
                     'slug': slug,            # Needed for the link URL
                     'title': pretty_title,   # Needed for display "Welcome"
                     'date': date_part,       # Needed for display "2025-12-09"
-                    'filename': file         # Needed for sorting
+                    'filename': file,         # Needed for sorting
+                    'keywords': keywords      # Extracted keywords
+
                 })
     
     # Sort by filename in REVERSE order (Newest dates first)
@@ -260,8 +282,7 @@ def blog():
     # Search/filter functionality
     if query:
         def matches(post):
-            # You can also add more fields if desired (e.g., content preview if available)
-            searchspace = f"{post['title']} {post['date']}"
+            searchspace = f"{post['title']} {post['date']} {' '.join(post['keywords'])}"
             return query in searchspace.lower()
         filtered_posts = [p for p in posts if matches(p)]
     else:

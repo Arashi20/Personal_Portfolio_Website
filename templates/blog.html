@@ -15,7 +15,7 @@
     <form method="get" class="blog-search-bar" role="search" style="margin: 32px auto 24px auto; max-width: 460px;">
         <label for="blog-search" class="visually-hidden">Search Blog</label>
         <input type="search" id="blog-search" name="q" value="{{ search_query|default('') }}" class="search-input"
-            autocomplete="off" placeholder="Search blog posts by title or date (YYYY-MM-DD)..."
+            autocomplete="off" placeholder="Search blog posts by title, keyword, or date..."
             style="width: 100%; padding: 12px 16px; font-size: 1.05rem; border-radius: 8px; border: 1.5px solid #D1E7FF; background: #fafdff;" />
     </form>
 
@@ -24,12 +24,21 @@
         {% for post in posts %}
         <a href="{{ url_for('post', title=post.slug) }}" class="blog-card">
             <div class="blog-card-content">
-                <!-- NEW: Display the Date above the title -->
+                <!-- Display the Date above the title -->
                 {% if post.date %}
                 <span class="blog-date">{{ post.date }}</span>
                 {% endif %}
 
                 <h2>{{ post.title }}</h2>
+                <!-- Display keywords as badges -->
+                {% if post.keywords %}
+                <div class="blog-keywords" style="margin-top: 12px; margin-bottom: 8px;">
+                    {% for keyword in post.keywords %}
+                    <span class="keyword-badge">{{ keyword }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
                 <span class="read-more">Read Article <i class="fas fa-arrow-right"></i></span>
             </div>
         </a>
@@ -37,7 +46,7 @@
         {% else %}
         <!-- No blog post matching search query -->
         <div style="text-align:center;padding:2em;color:#888;">
-        No blog posts matched your search.
+            No blog posts matched your search.
         </div>
         {% endif %}
     </div>

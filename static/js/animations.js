@@ -24,8 +24,8 @@
    Configuration: tweak these
    ------------------------------ */
 const OBSERVER_ROOT = null;                            // viewport
-const OBSERVER_ROOT_MARGIN = '0px 0px -12% 0px';       // trigger slightly before element fully visible
-const OBSERVER_THRESHOLD = 0.12;                       // fraction of element visible to consider it "in view"
+const OBSERVER_ROOT_MARGIN = '0px 0px -50px 0px';       // trigger slightly before element fully visible
+const OBSERVER_THRESHOLD = 0.05;                       // fraction of element visible to consider it "in view" (Work on 4K screens too)
 
 /* Fallback scroll throttle timing (ms) — only used by the scroll fallback */
 const SCROLL_THROTTLE_MS = 100;
