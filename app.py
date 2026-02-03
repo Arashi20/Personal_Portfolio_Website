@@ -163,7 +163,7 @@ PROJECTS_LIST = [
     {
         "title": "Stock Analyzer Tool",
         "badges": ["Python", "APIs", "DCF", "Stocks", "HTML/CSS/JS"],
-        "desc": "A lightweight stock analysis tool built in Python (Flask) that helps me perform DCF analyses on stocks quickly. Moreover, I cand add stocks to my wishlist with real up-to-date data fetched from APIs. Finally, I can add due diligence notes for each stock.",
+        "desc": "A lightweight stock analysis tool built in Python (Flask) that helps me perform DCF analyses on stocks quickly. Moreover, I can add stocks to my wishlist with real up-to-date data fetched from APIs. Finally, I can add due diligence notes for each stock.",
         "url": "https://github.com/Arashi20/Stock_Portfolio_Dashboard_V2",
         "button": "VIEW CODE",
         "icon": "fab fa-github",
