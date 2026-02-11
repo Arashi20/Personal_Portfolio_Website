@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort, url_for, request 
+from flask import Flask, render_template, abort, url_for, request, send_from_directory 
 from flask_talisman import Talisman
 from werkzeug.middleware.proxy_fix import ProxyFix
 import markdown
@@ -171,6 +171,15 @@ PROJECTS_LIST = [
 
     }
 ]
+
+
+# Manifest Route
+@app.route('/manifest.json')
+def manifest():
+    """
+    Serves the PWA manifest.json file.
+    """
+    return send_from_directory('static', 'manifest.json', mimetype='application/manifest+json')
 
 
 # Home Route
