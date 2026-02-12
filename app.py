@@ -169,6 +169,15 @@ PROJECTS_LIST = [
         "icon": "fab fa-github",
         "external": True
 
+    },
+    {
+        "title": "Workout Logger App",
+        "badges": ["Python", "Flask", "HTML/CSS/JS", "PostgreSQL"],
+        "desc": "A simple workout logging web application built with Flask and PostgreSQL. It allows users to log their workouts, view PRs, log their weight, and track progress over time.",
+        "url": "https://github.com/Arashi20/Workout_Logging_App",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
     }
 ]
 
