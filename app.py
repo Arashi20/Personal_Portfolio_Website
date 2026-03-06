@@ -62,7 +62,7 @@ PROJECTS_LIST = [
         "external": True
     },
     {
-        "title": "AI Stock Research Agent",
+        "title": "AI Stock Research Agent (INACTIVE)",
         "badges": ["LangChain", "LLMs", "Agents", "Streamlit", "Python"],
         "desc": "An autonomous Multi-Agent System to research financial markets. Agents scrape news, analyze sentiment, check technical indicators, and compile reports. The system automatically generates a comprehensive stock research report for any ticker symbol entered.",
         "url": "https://github.com/Arashi20/stock-research-MAS",
@@ -182,7 +182,7 @@ PROJECTS_LIST = [
 
     {
         "title": "Dutch Housing Market Analytics (Nederlands)",
-        "badges": ["Python", "SQL", "Power BI", "Data Analysis"],
+        "badges": ["Python", "SQL", "Power BI", "Data Analysis", "Research", "Scientific Writing"],
         "desc": "A comprehensive data analysis project focused on the Dutch housing market. The project involves collecting and analyzing housing data (CBS) to uncover trends, insights, and patterns in the market. The analysis is conducted using Python for data manipulation and SQL for database queries, with visualizations created in Power BI. The project is presented in Dutch and provides valuable insights into the dynamics of the housing market in the Netherlands.",
         "url": "https://github.com/Arashi20/Dutch_Housing_Analytics",
         "button": "VIEW CODE",
