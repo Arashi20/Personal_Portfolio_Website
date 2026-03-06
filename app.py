@@ -178,7 +178,18 @@ PROJECTS_LIST = [
         "button": "VIEW CODE",
         "icon": "fab fa-github",
         "external": True
+    },
+
+    {
+        "title": "Dutch Housing Market Analytics (Nederlands)",
+        "badges": ["Python", "SQL", "Power BI", "Data Analysis"],
+        "desc": "A comprehensive data analysis project focused on the Dutch housing market. The project involves collecting and analyzing housing data (CBS) to uncover trends, insights, and patterns in the market. The analysis is conducted using Python for data manipulation and SQL for database queries, with visualizations created in Power BI. The project is presented in Dutch and provides valuable insights into the dynamics of the housing market in the Netherlands.",
+        "url": "https://github.com/Arashi20/Dutch_Housing_Analytics",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
     }
+
 ]
 
 
