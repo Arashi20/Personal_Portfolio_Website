@@ -188,6 +188,16 @@ PROJECTS_LIST = [
         "button": "VIEW CODE",
         "icon": "fab fa-github",
         "external": True
+    },
+
+    {
+        "title": "Farsi Learning Webapp",
+        "badges": ["Python", "Next.js", "TypeScript", "LangChain", "NLP", "RAG", "FastAPI"],
+        "desc": "A RAG-powered web application for Persian diaspora and heritage speakers learning to read and write Farsi script. Built with a curated knowledge base of textbooks and vocabulary, the app answers questions about grammar, script, and pronunciation. Features a Q&A interface, alphabet explorer, and a quiz module with answers tailored to users who already speak conversational Farsi but never learned the written language.",
+        "url": "https://github.com/Arashi20/Farsi_Learning_Webapp",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
     }
 
 ]
