@@ -35,11 +35,11 @@ STL-tijdreeksdecompositie. De resultaten vertaalde ik naar een interactief
 Power BI dashboard en een wetenschappelijk rapport.
 
 De volledige code en het rapport zijn te vinden op GitHub:
-- 👉 [GitHub Repository](https://github.com/Arashi20/Dutch_Housing_Analytics)
-- 👉 [Rapport (PDF)](https://github.com/Arashi20/Dutch_Housing_Analytics/blob/main/EINDRAPPORT_De_Nederlandse_Woningcrisis.pdf)
+- [GitHub Repository](https://github.com/Arashi20/Dutch_Housing_Analytics) 👈
+- [Rapport (PDF)](https://github.com/Arashi20/Dutch_Housing_Analytics/blob/main/EINDRAPPORT_De_Nederlandse_Woningcrisis.pdf) 👈
 
 Een korte walkthrough van het dashboard is te bekijken via YouTube:
-- 👉 [YouTube Video](https://www.youtube.com/watch?v=Ol4p18ho1Nc)
+- [YouTube Video](https://www.youtube.com/watch?v=Ol4p18ho1Nc) 👈
 
 ## Geen Bouwcrisis, Wel een Procescrisis
 
