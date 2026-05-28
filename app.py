@@ -203,7 +203,7 @@ PROJECTS_LIST = [
     {
         "title": "KNMI Weather Data Analysis (2000–2025)",
         "badges": ["Python", "SQL", "Power BI", "PostgreSQL", "ETL", "Data Analysis", "Window Functions"],
-        "desc": "A data analysis project exploring 25 years of daily weather measurements across five Dutch weather stations (2000–2026). Using KNMI open data, I built a PostgreSQL star schema, wrote an ETL pipeline in Python, and progressively worked through SQL queries from basic aggregations to window functions and CTEs. The project ends with a Power BI dashboard revealing climate trends — including a measurable rise in warm days over the past decade, structural temperature differences between coastal and inland stations, and the surprisingly mild year-round climate of Vlissingen relative to the national average.",
+        "desc": "A data analysis project exploring 25 years of daily weather measurements across five Dutch weather stations (2000–2025). Using KNMI open data, I built a PostgreSQL star schema, wrote an ETL pipeline in Python, and progressively worked through SQL queries from basic aggregations to window functions and CTEs. The project ends with a Power BI dashboard revealing climate trends — including a measurable rise in warm days over the past decade, structural temperature differences between coastal and inland stations, and the surprisingly mild year-round climate of Vlissingen relative to the national average.",
         "url": "https://github.com/Arashi20/KNMI_Data_Exploration",
         "button": "VIEW CODE",
         "icon": "fab fa-github",
