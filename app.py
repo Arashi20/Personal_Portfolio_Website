@@ -213,7 +213,7 @@ PROJECTS_LIST = [
 
     {    "title": "Plant Disease Classifier",
         "badges": ["Pytorch", "Computer Vision", "Transfer Learning", "CNN", "Streamlit"],
-        "desc": "A computer vision project for automated plant disease detection using transfer learning with EfficientNet-B0 and PyTorch. To evaluate the accuracy-efficiency tradeoff, EfficientNet-B0 was benchmarked against MobileNetV3-Small — a lightweight architecture designed for edge deployment.",
+        "desc": "A computer vision project for automated plant disease detection using transfer learning with EfficientNet-B0 and PyTorch. Trained on the PlantVillage dataset(Hughes & Salathé, 2015), which contains 41,000+ labeled images across 15 classes of healthy and diseased plant leaves (pepper, potato, and tomato). To evaluate the accuracy-efficiency tradeoff, EfficientNet-B0 was benchmarked against MobileNetV3-Small — a lightweight architecture designed for edge deployment.",
         "url": "https://github.com/Arashi20/PlantDisease_Classification",
         "button": "VIEW CODE",
         "icon": "fab fa-github",
