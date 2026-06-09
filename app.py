@@ -209,6 +209,15 @@ PROJECTS_LIST = [
         "icon": "fab fa-github",
         "external": True
 
+    },
+
+    {    "title": "Plant Disease Classifier",
+        "badges": ["Pytorch", "Computer Vision", "Transfer Learning", "CNN", "Streamlit"],
+        "desc": "A computer vision project for automated plant disease detection using transfer learning with EfficientNet-B0 and PyTorch. To evaluate the accuracy-efficiency tradeoff, EfficientNet-B0 was benchmarked against MobileNetV3-Small — a lightweight architecture designed for edge deployment.",
+        "url": "https://github.com/Arashi20/PlantDisease_Classification",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
     }
 
 ]
