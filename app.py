@@ -218,6 +218,17 @@ PROJECTS_LIST = [
         "button": "VIEW CODE",
         "icon": "fab fa-github",
         "external": True
+    },
+
+    {
+        "title": "Travel Planner App",
+        "badges": ["React", "Tailwind CSS", "FastAPI", "PostgreSQL", "Railway"],
+        "desc": "A personal travel companion app to track bucket list goals, visited countries on an interactive scratch map, and trip plans — with a gamified account overview.",
+        "url": "https://github.com/Arashi20/Bucketlist_Tracker",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
+
     }
 
 ]
