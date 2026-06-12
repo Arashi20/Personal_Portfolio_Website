@@ -223,7 +223,7 @@ PROJECTS_LIST = [
     {
         "title": "Travel Planner App",
         "badges": ["React", "Tailwind CSS", "FastAPI", "PostgreSQL", "Railway"],
-        "desc": "A personal travel companion app to track bucket list goals, visited countries on an interactive scratch map, and trip plans — with a gamified account overview.",
+        "desc": "A personal travel companion app to track bucket list goals, visited countries on an interactive scratch map, and trip plans — with a gamified account overview. This was my first project using React and Tailwind CSS for the frontend, and FastAPI for the backend. It was harder to grasp than Flask + HTML/CSS, but I wanted to learn modern frontend development and how to build a more complex full-stack application.",
         "url": "https://github.com/Arashi20/Bucketlist_Tracker",
         "button": "VIEW CODE",
         "icon": "fab fa-github",
