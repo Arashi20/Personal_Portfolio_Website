@@ -11,20 +11,49 @@ app = Flask(__name__)
 # SECURITY CONFIGURATION (Railway/Production)
 # 1. ProxyFix: Tells Flask it is behind a proxy (Railway)
 
+#    x_prefix is not trusted: Railway does not set X-Forwarded-Prefix, so any
+#    value would come straight from the client.
 app.wsgi_app = ProxyFix(
-    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1
 )
 
 # 2. Talisman: Forces HTTPS and sets security headers.
-#    content_security_policy=None allows inline scripts/styles 
-#    (which you use for Google Analytics and animations).
+#    The CSP only allows scripts from this site and Google Analytics. The inline
+#    gtag snippet in base.html is allowed through a per-request nonce, so any
+#    other injected inline script is blocked. Inline styles stay allowed
+#    because the templates use style="" attributes.
 
-Talisman(app, content_security_policy=None, force_https=True)
+CSP = {
+    'default-src': "'self'",
+    'script-src': ["'self'", 'https://www.googletagmanager.com'],
+    'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com',
+                  'https://cdnjs.cloudflare.com'],
+    'font-src': ["'self'", 'data:', 'https://fonts.gstatic.com', 'https://cdnjs.cloudflare.com'],
+    'img-src': ["'self'", 'data:', 'https:'],
+    'connect-src': ["'self'", 'https://*.google-analytics.com',
+                    'https://*.analytics.google.com', 'https://*.googletagmanager.com'],
+    'frame-src': "'self'",
+    'object-src': "'none'",
+    'base-uri': "'self'",
+    'form-action': "'self'",
+    'frame-ancestors': "'self'",
+}
+
+Talisman(
+    app,
+    force_https=True,
+    content_security_policy=CSP,
+    content_security_policy_nonce_in=['script-src'],
+    permissions_policy={'camera': '()', 'microphone': '()', 'geolocation': '()',
+                        'interest-cohort': '()'},
+)
 # ---------------------------------------------------------
 
 
 
-POSTS_DIR = 'posts' # Directory where markdown blog posts are stored
+# Directory where markdown blog posts are stored (absolute, so it does not
+# depend on the working directory gunicorn is started from)
+POSTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'posts')
 
 # Project-specific detailed metadata
 PROJECTS = {
@@ -376,11 +405,12 @@ def post(title):
     Renders a specific blog post.
     It looks for a file named {title}.md in the posts directory.
     """
-    # Construct the file path
-    file_path = os.path.join(POSTS_DIR, f"{title}.md")
-    
-    # Check if file exists
-    if os.path.exists(file_path):
+    # Only serve files that actually exist in POSTS_DIR. Matching against the
+    # directory listing (instead of building a path from user input) rules out
+    # path traversal such as /blog/..%2F..%2Fsomething.
+    filename = f"{title}.md"
+    if os.path.isdir(POSTS_DIR) and filename in os.listdir(POSTS_DIR):
+        file_path = os.path.join(POSTS_DIR, filename)
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
             # Convert markdown content to HTML
