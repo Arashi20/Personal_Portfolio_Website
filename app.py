@@ -258,6 +258,16 @@ PROJECTS_LIST = [
         "icon": "fab fa-github",
         "external": True
 
+    },
+
+    {
+        "title": "30 Seconds Party Game",
+        "badges": ["Python", "FastAPI", "WebSockets", "JavaScript", "HTML/CSS", "Railway"],
+        "desc": "My own multiplayer version of the party game 30 Seconds, built so friends and family can play together on their own phones. One player describes five words in 30 seconds while their team guesses; a FastAPI server keeps every phone in sync in real time over WebSockets. It has a team mode and a one-phone game master mode, a fast-paced 2-minute Blitz! mode, theme filters, and Dutch, English and Finglish word decks (3,800+ words), so my Iranian family can join in too. It also handles players leaving or losing connection, and can be installed as a home-screen app.",
+        "url": "https://github.com/Arashi20/30-Seconds-Game",
+        "button": "VIEW CODE",
+        "icon": "fab fa-github",
+        "external": True
     }
 
 ]
