@@ -36,6 +36,6 @@ For my first year, I am part of the **Data Enablement Team (DET)**, where we are
 
 ## What's next?
 
-One month in, I am mostly learning: about Fabric, about the insurance domain, and about how a data platform is built from the ground up. In the coming years, I hope to rotate into teams that do more data science and AI work, possibly including a team that works a lot in **R**, which will be a nice reunion with my bachelor's years.
+One month in, I am mostly learning: about Fabric, about the insurance domain, and about how a data platform is built from the ground up. In the coming years, I hope to rotate into teams that do more data science and AI work.
 
 To anyone still stuck in the job hunt I described in February: keep building, keep applying, and don't rule out industries you think are boring. Sometimes the most interesting data lives in the least expected places.
